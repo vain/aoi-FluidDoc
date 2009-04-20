@@ -1,0 +1,6 @@
+*.swp
+.sconsign.dblite
+*.aux
+*.log
+*.out
+*.pdf

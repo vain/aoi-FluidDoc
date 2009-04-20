@@ -1,0 +1,44 @@
+% ####################################################################
+% ### LISTINGS
+\definecolor{lststringcolor}{rgb}{0.20,0.50,0.20}
+\definecolor{lstcommentcolor}{rgb}{0.40,0.40,0.40}
+\definecolor{lstkeywordcolor}{rgb}{0.50,0.10,0.10}
+\definecolor{lstidcolor}{rgb}{0.10,0.10,0.50}
+\definecolor{lstbg}{rgb}{0.97,0.97,0.97}
+\usepackage{listings}
+\lstset{
+	language=Java,
+	basicstyle=\ttfamily\tiny,
+	numberstyle=\ttfamily\tiny,
+	keywordstyle={\color{lstkeywordcolor}\normalfont\bfseries},
+	commentstyle={\color{lstcommentcolor}\itshape},
+	%stringstyle={\color{lststringcolor}\underbar},
+	stringstyle=\color{lststringcolor},
+	%identifierstyle=\color{lstidcolor},
+	backgroundcolor=\color{lstbg},
+	numbers=left,
+	xleftmargin=2em,
+	stepnumber=1,
+	tabsize=2,
+	breaklines=true,
+	breakatwhitespace=true,
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	frame=single
+}
+
+\lstdefinestyle{Java}
+{
+	language=Java
+}
+
+\lstdefinestyle{Python}
+{
+	language=Python
+}
+
+\lstdefinestyle{TeX}
+{
+	language=TeX
+}
