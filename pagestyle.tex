@@ -1,0 +1,18 @@
+% Headers
+\usepackage[automark]{scrpage2}
+\pagestyle{scrheadings}
+
+\setheadsepline{1pt}
+%\setfootsepline{1pt}
+
+\ohead{\thepage}
+\chead{}
+\ihead{\headmark}
+\cfoot{}
+
+
+% Im Header keine Nummerierung der Sections ...
+\renewcommand{\sectionmarkformat}{}
+\renewcommand{\subsectionmarkformat}{}
+% ... und im Text auch nicht
+\renewcommand*{\othersectionlevelsformat}[3]{}
