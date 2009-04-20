@@ -31,6 +31,9 @@
 \input{listings}
 \input{pagestyle}
 
+% Befehle nur für dieses Dokument
+\input{customcommands}
+
 
 \begin{document}
 
@@ -64,16 +67,103 @@
 % Dokument
 
 \section{Einleitung}
-Bezug zu letztem Guide, nur User-Guide, Geblabber
-\section{Was kann das Plugin?}
-Fluid / Soft Bodies, Poly Boundaries, Ausblick
+Bereits seit 2005 arbeitet \deltor an einem Plugin zur Physiksimulation.
+Zu Beginn sollte es ein reines Plugin für \blender werden. Er entdeckte
+dann zwar recht bald, dass in dieser Hinsicht bereits andere
+Programmierer an der Arbeit waren, entschied sich aber trotzdem dafür,
+sein eigenes Plugin weiterzuentwickeln - zum Vorteil für die Nutzer von
+\aoi. Denn auf unser schönes Programm stieß \deltor erst Anfang 2007.
+Der Kern seiner Simulation war seit jeher in Java geschrieben, was der
+Integration mit \aoi natürlich sehr entgegen kam. So nahmen die Dinge
+dann ihren Lauf.
+
+Sein Plugin ist zwar immernoch in einer recht frühen Entwicklungsphase,
+aber es ist durchaus schon zu gebrauchen - und sei es nur, um Spaß zu
+haben. Die jeweils aktuelle Version ist in seinem Blog verlinkt:
+
+\url{http://delt0r.blogspot.com/}
+
+Da es an Dokumentation jedoch ein bisschen mangelt, die Informationen in
+Foren verstreut sind und nicht jeder die Zeit hat, sich mittels "<Trial
+and Error"> einzuarbeiten, entstand dieser Guide, um den Einstieg etwas
+zu erleichtern. Eigentlich ist das schon die zweite Anleitung dieser
+Art, denn bereits von eineinhalb Jahren habe ich eine solche
+geschrieben:
+
+\url{http://www.uninformativ.de/?section=news&ndo=single&newsid=22}
+
+Bis vor kurzem war sie noch zu gebrauchen, aber Anfang April 2009 gab es
+dann einen etwas größeren Sprung in der Entwicklung, sodass spätestens
+jetzt eine Aktualisierung notwendig wurde.
+
+\subsection{Installation}
+Die Installation gestaltet sich denkbar einfach: Man besucht \deltor's
+Blog, sucht den Link und lädt eine Datei namens \texttt{Physics.jar}
+herunter. Diese Datei muss dann in den Unterordner \texttt{Plugins} des
+\aoi-Verzeichnisses kopiert werden. Fertig.
+
+Um die aktuelle Version nutzen zu können, sollte man am besten \aoi
+in der Version 2.7.2 verwenden. Für den Fall, dass \aoi noch gar nicht
+installiert ist, kann man es sich unter folgender URL herunterladen:
+
+\url{http://www.artofillusion.org}
+
+\subsection{Funktion und Einsatzzweck der Simulation}
+Wie der Name schon vermuten lässt, ist der primäre Zweck, Flüssigkeiten
+zu simulieren. Diese entstehen in sogenannten "<Emitters"> und
+interagieren dann mit als "<Boundary"> definierten Objekten in der
+Szene.\footnote{Dem Plugin fehlt noch eine deutsche Übersetzung, daher
+werde ich mich hier an die englischen Begriffe halten, um Verwirrung zu
+vermeiden. Sollte der eine oder andere Begriff Probleme bereiten, dann
+findet sich hier ein erstklassiges Online-Wörterbuch:
+\url{http://dict.leo.org}} Alternativ kann man auch ganze Objekte
+als "<Fluid"> vordefinieren, um auf einen Schlag viel Flüssigkeit in die
+Szene zu bringen.
+
+Mittlerweile beherrscht das Plugin jedoch auch die Simulation von
+sogenannten "<Soft Bodies">. Damit sind Körper gemeint, die im
+Wesentlichen deformierbar sind. Man kann damit in gewissem Rahmen zwar
+auch feste Körper simulieren, stößt aber bald an die Grenzen. Die Gründe
+dafür werden später näher erläutert. Eine richtige Simulation starrer
+Körper ("<Rigid Bodies">) wird es erst in der Zukunft geben.
+
+Das Plugin ist dabei auch tatsächlich eine \emph{Simulation}. Leider
+steht das in einem gewissen Widerspruch, was das "<Art"> in \aoi
+betrifft. Simulationen versuchen, der Realität ähnlich zu sein, was zur
+Folge hat, dass man sie nur sehr schwer kontrollieren kann. Es ist
+beispielsweise nicht möglich, das Anstoßen zweier Bierkrüge, von denen
+der Inhalt des einen in den anderen überschwappt, so darzustellen, wie
+man es sich gedanklich vorstellen würde. Stattdessen muss eine Animation
+erstellt werden, welche die Bierkrüge im Vorfeld genau so bewegt, dass
+die in ihnen enthaltene Flüssigkeit dann auch tatsächlich im richtigen
+Moment "<schwappt">.  Das ist nicht einfach, da sich die Flüssigkeit
+realitätsgetreu verhält und man die Krüge nicht mit den Händen
+\emph{anfassen} kann. Dadurch wird das Einschätzen der wirkenden Kräfte
+zu keiner leichten Aufgabe.
+
+Auf der anderen Seite ist aber genau das die Herausforderung.
+
+Abgesehen von den künstlerischen Aspekten bietet die Simulation
+natürlich eine großartige Spielwiese. Es macht einfach Spaß, einen Turm
+aus Kisten zu bauen und dann zuzusehen, wie dieser durch Wasser
+weggespült wird. Oder die Simulation einer Kegelbahn. Oder nachgebildete
+Hydraulik, die vielleicht sogar einem kleinen Roboter Leben einhaucht.
+Oder die realitätsgetreue Darstellung von Kleidung und Stoffen...
+
+Ein bisschen Zukunftsmusik ist in diesen Beispielen allerdings noch
+enthalten: Im Moment beherrscht das Plugin noch keine Reibung.
+
+\pagebreak
 \section{Grundlagen}
 Partikel = Vertices, PolyBoundaries, Backen
+
 \section{Flüssigkeitssimulation}
 einfach mal ein Beispiel durchgehen, möglichst viele Optionen
 besprechen.
-\section{Festkörpersimulation}
+
+\section{Simulation deformierbarer Körper}
 dito... Feder-Masse-System und so
+
 \section{Texturieren und Rendern}
 Raster-Renderer empfehlen, Grid für den Raytracer
 
