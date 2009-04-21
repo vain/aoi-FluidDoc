@@ -111,22 +111,22 @@ installiert ist, kann man es sich unter folgender URL herunterladen:
 
 \subsection{Funktion und Einsatzzweck der Simulation}
 Wie der Name schon vermuten lässt, ist der primäre Zweck, Flüssigkeiten
-zu simulieren. Diese entstehen in sogenannten "<Emitters"> und
-interagieren dann mit als "<Boundary"> definierten Objekten in der
+zu simulieren. Diese entstehen in sogenannten \fachb{Emitters} und
+interagieren dann mit als \fachb{Boundary} definierten Objekten in der
 Szene.\footnote{Dem Plugin fehlt noch eine deutsche Übersetzung, daher
 werde ich mich hier an die englischen Begriffe halten, um Verwirrung zu
 vermeiden. Sollte der eine oder andere Begriff Probleme bereiten, dann
 findet sich hier ein erstklassiges Online-Wörterbuch:
 \url{http://dict.leo.org}} Alternativ kann man auch ganze Objekte
-als "<Fluid"> vordefinieren, um auf einen Schlag viel Flüssigkeit in die
+als \fachb{Fluid} vordefinieren, um auf einen Schlag viel Flüssigkeit in die
 Szene zu bringen.
 
 Mittlerweile beherrscht das Plugin jedoch auch die Simulation von
-sogenannten "<Soft Bodies">. Damit sind Körper gemeint, die im
+sogenannten \fachb{Soft Bodies}. Damit sind Körper gemeint, die im
 Wesentlichen deformierbar sind. Man kann damit in gewissem Rahmen zwar
 auch feste Körper simulieren, stößt aber bald an die Grenzen. Die Gründe
 dafür werden später näher erläutert. Eine richtige Simulation starrer
-Körper ("<Rigid Bodies">) wird es erst in der Zukunft geben.
+Körper (\fachb{Rigid Bodies}) wird es erst in der Zukunft geben.
 
 Das Plugin ist dabei auch tatsächlich eine \emph{Simulation}. Leider
 steht das in einem gewissen Widerspruch zu dem "<Art"> in \aoi.
@@ -158,7 +158,7 @@ Nichtsdestotrotz: Viel Spaß!
 
 \pagebreak
 \section{Grundlagen}
-\subsection{Animationen und "<Baking">}
+\subsection{Animationen und \fachb{Baking}}
 In der Einleitung fiel bereits das entscheidende Stichwort: Animation.
 Die \fluidsim beschreibt Vorgänge, die sich zusammen mit der Zeit
 verändern. Man kommt also nicht umhin, eine Animation zu erstellen
@@ -178,7 +178,7 @@ navigieren.
 Da die Berechnungen, welche die \fluidsim anstellt, ziemlich aufwändig
 sind, können sie nicht in Echtzeit erfolgen. Die Simulation muss also
 vor dem eigentlichen Rendern vorberechnet werden. Dieser Vorgang wird
-"<Baking"> genannt und wird aus dem Plugin heraus angestoßen. Erst
+\fachb{Baking} genannt und wird aus dem Plugin heraus angestoßen. Erst
 hiernach hat es auch wirklich eine Auswirkung, wenn man den aktuellen
 Zeitpunkt in der Zeitleiste verändert, und die Objekte bewegen sich.
 
@@ -193,7 +193,7 @@ ab, das heißt, es gibt nur eine endliche Anzahl fester Zeitpunkte, die
 berechnet werden. Dazwischen gibt es zwangsweise "<Lücken">. Daraus
 folgt natürlich, dass eine Simulation dann genauer wird, wenn diese
 Zeitpunkte näher beeinander liegen. Der Abstand zweier solcher
-Zeitpunkte wird im Plugin "<Step Size"> genannt.
+Zeitpunkte wird im Plugin \fachb{Step Size} genannt.
 
 Man muss hier einen guten Kompromiss finden: Ist die Step Size zu groß,
 dann ist die Simulation zwar sehr schnell berechnet, aber höchst
@@ -206,7 +206,7 @@ hier: \url{http://xkcd.com/505/}}
 \addpic{Partikel überspringt Hindernis}
 
 Die Flüssigkeiten werden intern als kleine Partikel fester Größe
-modelliert, anhand des Parameters "<Particle Size">. Wie man schon
+modelliert, anhand des Parameters \fachb{Particle Size}. Wie man schon
 erahnen kann, gilt hier ein ähnlicher Zusammenhang: Sind die Partikel
 sehr klein, dann ist die Simulation sehr detailliert, aber langsam. Sind
 sie zu groß, simuliert man irgendwann Fußbälle.
@@ -214,7 +214,7 @@ sie zu groß, simuliert man irgendwann Fußbälle.
 Bei beiden Parametern sind Werte voreingestellt, die für einfache
 Beispiele ausreichend sind.
 
-\subsection{"<Selection Sets"> zur Gruppierung}
+\subsection{\fachb{Selection Sets} zur Gruppierung}
 Mit Version 0.6.6 der \fluidsim wurde eine Integration mit dem
 Selections-Plugin von \aoi geschaffen. Das ist insofern eine große
 Vereinfachung, als damit massenhaft Objekten Werte zugeordnet werden
