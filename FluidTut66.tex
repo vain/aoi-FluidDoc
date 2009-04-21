@@ -14,7 +14,7 @@
 \parskip 1em
 \definecolor{darkblue}{rgb}{0,0,0.5}
 \hypersetup{
-	pdftitle={Fluid Simulation 0.6.6},
+	pdftitle={Fluid-Simulation 0.6.6},
 	pdfauthor={TroY},
 	pdfkeywords={AoI, Physics, Fluid},
 	%
@@ -39,7 +39,7 @@
 
 % Titelseite mit Copyleft
 \author{TroY \\ \url{http://www.uninformativ.de}}
-\title{Fluid Simulation 0.6.6 \\ mit Art of Illusion}
+\title{\fluidsim 0.6.6 \\ mit Art of Illusion}
 \date{April 2009}
 \maketitle
 \thispagestyle{empty}
@@ -158,15 +158,102 @@ Nichtsdestotrotz: Viel Spaß!
 
 \pagebreak
 \section{Grundlagen}
-Partikel = Vertices, PolyBoundaries, Backen
+\subsection{Animationen und "<Baking">}
+In der Einleitung fiel bereits das entscheidende Stichwort: Animation.
+Die \fluidsim beschreibt Vorgänge, die sich zusammen mit der Zeit
+verändern. Man kommt also nicht umhin, eine Animation zu erstellen
+-- auch, wenn man am Ende nur ein einzelnes Bild rendern möchte. Das
+wäre zwar keine allzu schwere Arbeit (Animation ist eine der
+Hauptaufgaben von \aoi), aber die \fluidsim nimmt sie uns großteils
+sogar ab. Das Minimum ist jedoch, sich die \emph{Zeitleiste} zugänglich
+zu machen. Im Normalfall muss man dazu nichts weiter tun, als den Rand
+am unteren Ende des \aoi-Hauptfensters mit der Maus ein Stück nach oben
+zu ziehen.
 
+\addpic{Zeitleiste}
+
+Mit dieser Leiste ist es möglich, innerhalb einer Animation zu
+navigieren.
+
+Da die Berechnungen, welche die \fluidsim anstellt, ziemlich aufwändig
+sind, können sie nicht in Echtzeit erfolgen. Die Simulation muss also
+vor dem eigentlichen Rendern vorberechnet werden. Dieser Vorgang wird
+"<Baking"> genannt und wird aus dem Plugin heraus angestoßen. Erst
+hiernach hat es auch wirklich eine Auswirkung, wenn man den aktuellen
+Zeitpunkt in der Zeitleiste verändert, und die Objekte bewegen sich.
+
+Die Daten werden dabei in einer Datei zwischengespeichert. Man sollte
+hier nicht zu geizig sein und sich mit einem fast vollen Datenträger
+begnügen: Diese Datei kann bei langen Simulationen mehrere hundert
+Megabyte groß werden.
+
+\subsection{Zeitschritte und Partikelgrößen}
+Eine physikalische Simulation läuft am Computer immer "<diskretisiert">
+ab, das heißt, es gibt nur eine endliche Anzahl fester Zeitpunkte, die
+berechnet werden. Dazwischen gibt es zwangsweise "<Lücken">. Daraus
+folgt natürlich, dass eine Simulation dann genauer wird, wenn diese
+Zeitpunkte näher beeinander liegen. Der Abstand zweier solcher
+Zeitpunkte wird im Plugin "<Step Size"> genannt.
+
+Man muss hier einen guten Kompromiss finden: Ist die Step Size zu groß,
+dann ist die Simulation zwar sehr schnell berechnet, aber höchst
+ungenau. Es kann dann passieren, dass Flüssigkeitspartikel ihre
+Hindernisse "<überspringen">. Wird die Step Size dagegen zu klein
+gewählt, dauert es einfach zu lange, bis der Baking-Vorgang beendet
+ist.\footnote{Eine schöne Anekdote zu diesem Thema findet sich übrigens
+hier: \url{http://xkcd.com/505/}}
+
+\addpic{Partikel überspringt Hindernis}
+
+Die Flüssigkeiten werden intern als kleine Partikel fester Größe
+modelliert, anhand des Parameters "<Particle Size">. Wie man schon
+erahnen kann, gilt hier ein ähnlicher Zusammenhang: Sind die Partikel
+sehr klein, dann ist die Simulation sehr detailliert, aber langsam. Sind
+sie zu groß, simuliert man irgendwann Fußbälle.
+
+Bei beiden Parametern sind Werte voreingestellt, die für einfache
+Beispiele ausreichend sind.
+
+\subsection{"<Selection Sets"> zur Gruppierung}
+Mit Version 0.6.6 der \fluidsim wurde eine Integration mit dem
+Selections-Plugin von \aoi geschaffen. Das ist insofern eine große
+Vereinfachung, als damit massenhaft Objekten Werte zugeordnet werden
+können. Außerdem wird die Übersicht erheblich erhöht. Daher lohnt es
+sich, einen kurzen Blick auf dieses Plugin zu werfen. Falls es noch
+nicht installiert ist, kann es über den Scripts and Plugins Manager
+leicht nachinstalliert werden.
+
+Die Grundidee des Selections-Plugins ist es, Objekte in logischen
+Gruppen zusammenzufassen. Es kann noch ein bisschen mehr, zum Beispiel
+Locking oder Ausblenden der Objekte, die für unseren Zweck aber nicht
+ganz so interessant sind -- und überdies selbst\-er\-klä\-rend.
+
+Die Bedienung ist recht einfach: Die Objekte, die man zusammenfassen
+will, markiert man und klickt dann unter "<Selections"> auf "<New">. Das
+erstellt eine neue Gruppe, die automatisch all diese Objekte enthält. Da
+jedoch nicht ganz offensichtlich ist, dass dies der Fall ist, kann mit
+einem Doppelklick auf den Namen des Selection Sets ein neues
+Dialogfenster mit einer Übersicht öffnen. In diesem neuen Dialog können
+auch Objekte aus der Gruppe herausgenommen werden. Genauer gesagt: Was
+hier markiert ist, gehört zur Gruppe.
+
+Ein möglicher Anwendungsfall: Man hat sehr viele Kisten und möchte diese
+später alle auf die gleiche Weise als Soft Body verwenden. Dazu fasst
+man sie vorab zu einem Selection Set zusammen.
+
+
+\pagebreak
 \section{Flüssigkeitssimulation}
 einfach mal ein Beispiel durchgehen, möglichst viele Optionen
 besprechen.
 
+
+\pagebreak
 \section{Simulation deformierbarer Körper}
 dito... Feder-Masse-System und so
 
+
+\pagebreak
 \section{Texturieren und Rendern}
 Raster-Renderer empfehlen, Grid für den Raytracer
 
