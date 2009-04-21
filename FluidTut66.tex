@@ -244,8 +244,113 @@ man sie vorab zu einem Selection Set zusammen.
 
 \pagebreak
 \section{Flüssigkeitssimulation}
-einfach mal ein Beispiel durchgehen, möglichst viele Optionen
-besprechen.
+Die konkrete Anwendung der \fluidsim erklärt man wohl am besten anhand
+eines Beispiels. Im ersten Teil soll unser Ziel sein,
+\itA
+	\item ein gefülltes Becken mit Wasser zu erstellen
+	\item und dann noch weiteres Wasser dazuzugießen.
+\itE
+
+\subsection{Das gefüllte Becken (\fachb{Boundaries} und \fachb{Fluids})}
+Zuerst werden wir das Becken als Boundary definieren. Seit einiger Zeit
+unterstützt das Plugin sogenannte \fachb{Poly Boundaries}, also Objekte,
+deren \emph{Flächen} als Hindernis benutzt werden können.\footnote{In
+älteren Versionen war das anders. Früher galten die Punkte eines
+Objektes als Grenzen, was einiges an Zwischenarbeit erforderte.} Das
+heißt für uns, dass wir ganz komfortabel ein PolyMesh-Objekt in die
+Szene bringen und dieses unverändert nutzen können. Tun wir das also und
+erstellen uns ein sehr rudimentäres Becken. Um die Übersicht zu wahren,
+nennen wir es um in "<Becken">.
+
+\addpic{Becken}
+
+Wie eingangs erwähnt, lassen sich Objekte als Fluid definieren und
+werden damit komplett flüssig. Genau das wollen wir jetzt nutzen: Wir
+erstellen einen weiteren, einfachen PolyMesh-Quader, den wir in das
+Becken setzen. Noch ist er solide, aber das wird sich bald ändern. Wir
+nennen ihn "<Fuellung">.
+
+\addpic{Becken mit solider Füllung}
+
+Um Objekten physikalische Eigenschaften zuordnen zu können, muss zuerst
+eine Instanz des Fluid-Plugins zur Szene hinzugefügt werden. Man wählt
+dazu einfach die blauen Tröpfchen aus der Toolbar aus und zieht ein
+Rechteck auf. Was man im nächsten Schritt sieht, ist das Drahtgitter
+eines Würfels. Dieser Bereich ist wichtig: Er definiert, wo
+Flüssigkeiten existieren können und wo nicht. Verlassen Partikel diesen
+Würfel, werden sie automatisch verschwinden. Es ist aber kein Problem,
+den Bereich später einfach mit dem gewohnten Skalierungstool zu
+erweitern.
+
+Ein Doppelklick auf das neu erstellte Objekt in der Objektliste öffnet
+seine Eigenschaften. Hier wird sich nun die ganze Magie abspielen.
+
+Wir markieren das Objekt "<Becken"> in der mittleren
+Liste.\rand{Boundary} Um einem
+Objekt Eigenschaften zuzuweisen, müssen wir es erst in die aktuelle
+"<Auswahl"> übernehmen. Die Begrifflichkeiten kollidieren hier leider
+etwas, denn diese Auswahl hat nichts mit den Selection Sets zu tun -- zu
+denen kommen wir erst später. Die Auswahl, um die es hier geht, bestimmt
+nur jene Objekte, auf die die gesetzten Parameter wirken. Man könnte in
+der mittleren Liste also auch mehrere Objekte auf einmal markieren und
+diese damit gleichzeitig bearbeiten.
+
+Aus der rechten Dropdown-Liste wählen wir nun "<Boundry">\footnote{Die
+Rechtschreibfehler stehen weiter unten auf der "<TODO">-Liste...} und
+klicken auf "<Set To Selection">. Es werden jetzt ein paar mehr Optionen
+zugänglich, für unser Beispiel sind diese aber optimal.
+
+\addpic{Becken im Plugin definiert}
+
+Als nächstes erklären wir den inneren Quader zur
+Flüssigkeit.\rand{Fluid} Auch dieser Vorgang gestaltet sich ziemlich
+einfach: Das Objekt namens "<Fuellung"> aus der mittleren Liste wählen,
+auf "<Set To Selection"> klicken und diesmal weisen wir ihm den Typ
+"<Fluid"> zu. Das war's.
+
+Jetzt können wir auch schon den ersten "<Backvorgang">
+starten.\rand{Baking} Dazu wechseln wir auf den Tab "<Baking">. Hier
+kann man einen Zielort für die temporäre Datei angeben, der Standardwert
+sollte aber vorübergehend ausreichen. Wichtig ist: Wenn man von vorne
+mit der Simulation anfangen will, sollte man immer die beiden Knöpfe
+betätigen:
+
+\itA
+	\item "<\textbf{Clear Object Cache}">: Dieser Knopf signalisiert dem
+	Plugin, dass es bitte alle zwischengespeicherten Informationen über
+	die vorhandenen Objekte vergessen möge, vorallem deren Geometrie.
+	Das heißt, diesen Knopf muss man auch betätigen, wenn man im
+	Nachhinein die Größe des Beckens ändern wollte.
+
+	\item "<\textbf{Reset Simulation}">: Dagegen sorgt dieser zweite
+	Knopf dafür, dass sowohl die Zeit auf Null zurückgesetzt als auch
+	alle bisher berechneten Bewegungen gelöscht werden. Das muss man
+	also zusätzlich auslösen, wenn man sicherstellen will, dass die
+	Simulation auch wirklich von vorne anfängt zu rechnen.
+
+\itE
+
+Im unteren Feld können wir noch eingeben, zu welchem Zeitpunkt die
+Simulation enden soll. Dieser Zeitpunkt ist \emph{absolut}, das heißt,
+er bestimmt \emph{nicht die Dauer} der Simulation. Wir schreiben also
+eine "<2"> in das Feld, da wir von Sekunde 0 bis Sekunde 2 simulieren
+wollen.
+
+Nach einem Klick auf "<Bake"> erscheint kurz ein Fortschrittsbalken, der
+aber kurz darauf wieder verschwindet. Verlässt man nun das Plugin mit
+einem Klick auf "<OK"> und bewegt danach den Schieber in der Zeitleiste
+etwas, sollte man auch schon die ersten Anzeichen von Leben in der
+Flüssigkeit entdecken können.
+
+\addpic{Ein erster Testrender}
+
+\subsection{Weiterführende Optionen zum letzten Beispiel}
+Was es sonst noch so die bis jetzt besprochenen Objekte betreffend gibt.
+
+\subsection{Mehr Flüssigkeit dazugießen (\fachb{Emitters})}
+
+\subsection{Weiterführende Optionen zum letzten Beispiel}
+dito
 
 
 \pagebreak
