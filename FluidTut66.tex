@@ -40,7 +40,7 @@
 % Titelseite mit Copyleft
 \author{TroY \\ \url{http://www.uninformativ.de}}
 \title{Fluid Simulation 0.6.6 \\ mit Art of Illusion}
-\date{20. April 2009}
+\date{April 2009}
 \maketitle
 \thispagestyle{empty}
 
@@ -67,19 +67,20 @@
 % Dokument
 
 \section{Einleitung}
-Bereits seit 2005 arbeitet \deltor an einem Plugin zur Physiksimulation.
-Zu Beginn sollte es ein reines Plugin für \blender werden. Er entdeckte
+Bereits seit 2005 arbeitet \deltor an einem Plugin zur Physiksimulation,
+was zu Beginn ein reines Plugin für \blender werden sollte. Er entdeckte
 dann zwar recht bald, dass in dieser Hinsicht bereits andere
 Programmierer an der Arbeit waren, entschied sich aber trotzdem dafür,
-sein eigenes Plugin weiterzuentwickeln - zum Vorteil für die Nutzer von
+sein eigenes Plugin weiterzuentwickeln -- zum Vorteil für die Nutzer von
 \aoi. Denn auf unser schönes Programm stieß \deltor erst Anfang 2007.
 Der Kern seiner Simulation war seit jeher in Java geschrieben, was der
 Integration mit \aoi natürlich sehr entgegen kam. So nahmen die Dinge
 dann ihren Lauf.
 
-Sein Plugin ist zwar immernoch in einer recht frühen Entwicklungsphase,
-aber es ist durchaus schon zu gebrauchen - und sei es nur, um Spaß zu
-haben. Die jeweils aktuelle Version ist in seinem Blog verlinkt:
+\deltor's Plugin ist zwar immernoch in einer recht frühen
+Entwicklungsphase, aber es ist durchaus schon zu gebrauchen -- und sei
+es nur, um Spaß zu haben. Die jeweils aktuelle Version ist in seinem
+Blog verlinkt:
 
 \url{http://delt0r.blogspot.com/}
 
@@ -88,21 +89,21 @@ Foren verstreut sind und nicht jeder die Zeit hat, sich mittels "<Trial
 and Error"> einzuarbeiten, entstand dieser Guide, um den Einstieg etwas
 zu erleichtern. Eigentlich ist das schon die zweite Anleitung dieser
 Art, denn bereits von eineinhalb Jahren habe ich eine solche
-geschrieben:
+geschrieben. Bis vor kurzem war sie noch zu gebrauchen, aber Anfang
+April 2009 gab es dann einen etwas größeren Sprung in der Entwicklung,
+sodass spätestens jetzt eine Aktualisierung notwendig wurde.
 
-\url{http://www.uninformativ.de/?section=news&ndo=single&newsid=22}
-
-Bis vor kurzem war sie noch zu gebrauchen, aber Anfang April 2009 gab es
-dann einen etwas größeren Sprung in der Entwicklung, sodass spätestens
-jetzt eine Aktualisierung notwendig wurde.
+Es sei angemerkt, dass dies keine offizielle Dokumentation ist. Dennoch
+will ich versuchen, die Vorgänge so genau wie möglich darzustellen und
+auf möglichst alle Optionen einzugehen.
 
 \subsection{Installation}
 Die Installation gestaltet sich denkbar einfach: Man besucht \deltor's
-Blog, sucht den Link und lädt eine Datei namens \texttt{Physics.jar}
-herunter. Diese Datei muss dann in den Unterordner \texttt{Plugins} des
-\aoi-Verzeichnisses kopiert werden. Fertig.
+Blog, sucht den jeweils aktuellen Link und lädt eine Datei namens
+\texttt{Physics.jar} herunter. Diese Datei muss dann in den Unterordner
+\texttt{Plugins} des \aoi-Verzeichnisses kopiert werden. Fertig.
 
-Um die aktuelle Version nutzen zu können, sollte man am besten \aoi
+Um die Version 0.6.6 nutzen zu können, sollte man am besten \aoi
 in der Version 2.7.2 verwenden. Für den Fall, dass \aoi noch gar nicht
 installiert ist, kann man es sich unter folgender URL herunterladen:
 
@@ -128,18 +129,18 @@ dafür werden später näher erläutert. Eine richtige Simulation starrer
 Körper ("<Rigid Bodies">) wird es erst in der Zukunft geben.
 
 Das Plugin ist dabei auch tatsächlich eine \emph{Simulation}. Leider
-steht das in einem gewissen Widerspruch, was das "<Art"> in \aoi
-betrifft. Simulationen versuchen, der Realität ähnlich zu sein, was zur
-Folge hat, dass man sie nur sehr schwer kontrollieren kann. Es ist
-beispielsweise nicht möglich, das Anstoßen zweier Bierkrüge, von denen
-der Inhalt des einen in den anderen überschwappt, so darzustellen, wie
-man es sich gedanklich vorstellen würde. Stattdessen muss eine Animation
-erstellt werden, welche die Bierkrüge im Vorfeld genau so bewegt, dass
-die in ihnen enthaltene Flüssigkeit dann auch tatsächlich im richtigen
-Moment "<schwappt">.  Das ist nicht einfach, da sich die Flüssigkeit
+steht das in einem gewissen Widerspruch zu dem "<Art"> in \aoi.
+Simulationen versuchen, der Realität ähnlich zu sein, was zur Folge hat,
+dass man sie nur sehr schwer kontrollieren kann. Es ist beispielsweise
+nicht möglich, das Anstoßen zweier Bierkrüge, von denen der Inhalt des
+einen in den anderen überschwappt, so darzustellen, wie man es sich
+gedanklich vorstellen würde. Stattdessen muss eine Animation erstellt
+werden, welche die Bierkrüge im Vorfeld genau so bewegt, dass die in
+ihnen enthaltene Flüssigkeit dann auch tatsächlich im richtigen Moment
+"<schwappt">.  Das ist nicht einfach, da sich die Flüssigkeit
 realitätsgetreu verhält und man die Krüge nicht mit den Händen
-\emph{anfassen} kann. Dadurch wird das Einschätzen der wirkenden Kräfte
-zu keiner leichten Aufgabe.
+\emph{anfassen} kann. Dadurch wird das Einschätzen der vorhandenen
+Massen und wirkenden Kräfte zu keiner leichten Aufgabe.
 
 Auf der anderen Seite ist aber genau das die Herausforderung.
 
@@ -152,6 +153,8 @@ Oder die realitätsgetreue Darstellung von Kleidung und Stoffen...
 
 Ein bisschen Zukunftsmusik ist in diesen Beispielen allerdings noch
 enthalten: Im Moment beherrscht das Plugin noch keine Reibung.
+
+Nichtsdestotrotz: Viel Spaß!
 
 \pagebreak
 \section{Grundlagen}
