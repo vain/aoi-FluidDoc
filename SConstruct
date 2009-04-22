@@ -7,7 +7,8 @@ env = Environment()
 
 
 # Builder, der PDF's aus SVG's mittels Inkscape baut
-pdfBuilder = Builder(action='inkscape --without-gui --export-pdf=${TARGET.base}.pdf $SOURCE',
+Svg2pdfString = 'inkscape --without-gui --export-pdf=${TARGET.base}.pdf $SOURCE'
+pdfBuilder = Builder(action=Svg2pdfString,
 						suffix='.pdf',
 						src_suffix='.svg')
 env.Append(BUILDERS={'Svg2pdf': pdfBuilder})
@@ -29,6 +30,7 @@ def PDFWithSVG(env, target, source):
 		print includes
 		for i in includes:
 			env.Svg2pdf(source = i)
+			#env.Command(i, i[:-3] + "pdf", Svg2pdfString)
 	
 	env.PDF(target = target, source = source)
 	

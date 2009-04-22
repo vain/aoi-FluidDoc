@@ -114,8 +114,8 @@ Blog, sucht den jeweils aktuellen Link und lädt eine Datei namens
 \texttt{Physics.jar} herunter. Diese Datei muss dann in den Unterordner
 \texttt{Plugins} des \aoi-Verzeichnisses kopiert werden. Fertig.
 
-Um die Version 0.6.6 nutzen zu können, sollte man am besten \aoi
-in der Version 2.7.2 verwenden. Für den Fall, dass \aoi noch gar nicht
+Um die Version~0.6.6 nutzen zu können, sollte man am besten \aoi
+in der Version~2.7.2 verwenden. Für den Fall, dass \aoi noch gar nicht
 installiert ist, kann man es sich unter folgender URL herunterladen:
 
 \url{http://www.artofillusion.org}
@@ -136,24 +136,25 @@ Szene zu bringen.
 
 Mittlerweile beherrscht das Plugin jedoch auch die Simulation von
 sogenannten \fachb{Soft Bodies}. Damit sind Körper gemeint, die im
-Wesentlichen deformierbar sind. Man kann damit in gewissem Rahmen zwar
-auch feste Körper simulieren, stößt aber bald an die Grenzen. Die Gründe
-dafür werden später näher erläutert. Eine richtige Simulation starrer
-Körper (\fachb{Rigid Bodies}) wird es erst in der Zukunft geben.
+Wesentlichen deformierbar sind, also zum Beispiel Gummibälle oder
+Textilien. Man kann damit in gewissem Rahmen zwar auch feste Körper
+simulieren, stößt aber bald an die Grenzen. Die Gründe dafür werden
+später näher erläutert. Eine richtige Simulation starrer Körper
+(\fachb{Rigid Bodies}) wird es erst in Zukunft geben.
 
 Das Plugin ist dabei auch tatsächlich eine \emph{Simulation}. Leider
 steht das in einem gewissen Widerspruch zu dem "<Art"> in \aoi.
 Simulationen versuchen, der Realität ähnlich zu sein, was zur Folge hat,
 dass man sie nur sehr schwer kontrollieren kann. Es ist beispielsweise
-nicht möglich, das Anstoßen zweier Bierkrüge, von denen der Inhalt des
-einen in den anderen überschwappt, so darzustellen, wie man es sich
-gedanklich vorstellen würde. Stattdessen muss eine Animation erstellt
-werden, welche die Bierkrüge im Vorfeld genau so bewegt, dass die in
-ihnen enthaltene Flüssigkeit dann auch tatsächlich im richtigen Moment
-"<schwappt">.  Das ist nicht einfach, da sich die Flüssigkeit
-realitätsgetreu verhält und man die Krüge nicht mit den Händen
-\emph{anfassen} kann. Dadurch wird das Einschätzen der vorhandenen
-Massen und wirkenden Kräfte zu keiner leichten Aufgabe.
+nicht einfach, ein fertiges Bild, das das Anstoßen zweier Bierkrüge,
+wobei der Inhalt des einen in den anderen überschwappt, mit der
+\fluidsim "<mal eben"> etwas aufzupeppen. Stattdessen muss eine
+Animation erstellt werden, welche die Bierkrüge im Vorfeld genau so
+bewegt, dass die in ihnen enthaltene Flüssigkeit dann auch tatsächlich
+im richtigen Moment "<schwappt">.  Das ist nicht einfach, da sich die
+Flüssigkeit realitätsgetreu verhält und man die Krüge nicht mit den
+Händen \emph{anfassen} kann. Dadurch wird das Einschätzen der
+vorhandenen Massen und wirkenden Kräfte zu keiner leichten Aufgabe.
 
 Auf der anderen Seite ist aber genau das die Herausforderung.
 
@@ -162,7 +163,10 @@ natürlich eine großartige Spielwiese. Es macht einfach Spaß, einen Turm
 aus Kisten zu bauen und dann zuzusehen, wie dieser durch Wasser
 weggespült wird. Oder die Simulation einer Kegelbahn. Oder nachgebildete
 Hydraulik, die vielleicht sogar einem kleinen Roboter Leben einhaucht.
-Oder die realitätsgetreue Darstellung von Kleidung und Stoffen...
+Oder die realitätsgetreue Darstellung von Kleidung und Stoffen.
+Zusammen mit \aoi's Fähigkeiten zur Animation bieten sich nahezu
+unendliche Möglichkeiten, da hier auch Prozeduren und Skripte genutzt
+werden können.
 
 Ein bisschen Zukunftsmusik ist in diesen Beispielen allerdings noch
 enthalten: Im Moment beherrscht das Plugin noch keine Reibung.
@@ -181,21 +185,23 @@ Nichtsdestotrotz: Viel Spaß!
 %{{{
 In der Einleitung fiel bereits das entscheidende Stichwort: Animation.
 Die \fluidsim beschreibt Vorgänge, die sich zusammen mit der Zeit
-verändern. Man kommt also nicht umhin, eine Animation zu erstellen
--- auch, wenn man am Ende nur ein einzelnes Bild rendern möchte. Das
-wäre zwar keine allzu schwere Arbeit (Animation ist eine der
-Hauptaufgaben von \aoi), aber die \fluidsim nimmt sie uns großteils
-sogar ab. Das Minimum ist jedoch, sich die \emph{Zeitleiste} zugänglich
-zu machen. Im Normalfall muss man dazu nichts weiter tun, als den Rand
-am unteren Ende des \aoi-Hauptfensters mit der Maus ein Stück nach oben
-zu ziehen.
+verändern. Man kommt also nicht umhin, eine Animation zu erstellen --
+auch, wenn man am Ende nur ein einzelnes Bild rendern möchte. Das wäre
+zwar keine allzu schwere Arbeit (Animation ist eine der Hauptaufgaben
+von \aoi), aber die \fluidsim nimmt sie uns großteils sogar ab. Das
+Minimum ist jedoch, sich die \emph{Zeitleiste} zugänglich zu machen. Im
+Normalfall muss man dazu nichts weiter tun, als den Rand am unteren Ende
+des \aoi-Hauptfensters mit der Maus ein Stück nach oben zu ziehen. Mit
+dieser Leiste ist es möglich, innerhalb einer Animation zu navigieren.
 
 \fpic{gfx/shots/TimeScore.png}{fig:timescore}
 {\aoi mit sichtbarer Zeitleiste. An der orange markierten Stelle muss
 gezogen werden, der grüne Schieber dient zum Setzen des Zeitpunktes.}
 
-Mit dieser Leiste ist es möglich, innerhalb einer Animation zu
-navigieren.
+Mit den weiteren Möglichkeiten zur Animation muss man sich vorerst nicht
+befassen. Wir werden allerdings später darauf zurückkommen, wenn wir das
+Rendern von Einzelbildern hinter uns haben und uns um echte Animationen
+kümmern.
 
 Da die Berechnungen, welche die \fluidsim anstellt, ziemlich aufwändig
 sind, können sie nicht in Echtzeit erfolgen. Die Simulation muss also
@@ -239,35 +245,18 @@ sie zu groß, simuliert man irgendwann Fußbälle.
 
 Bei beiden Parametern sind Werte voreingestellt, die für einfache
 Beispiele ausreichend sind.
-%}}}
 
-\subsection{\fachb{Selection Sets} zur Gruppierung}
-%{{{
-Mit Version 0.6.6 der \fluidsim wurde eine Integration mit dem
-Selections-Plugin von \aoi geschaffen. Das ist insofern eine große
-Vereinfachung, als damit massenhaft Objekten Werte zugeordnet werden
-können. Außerdem wird die Übersicht erheblich erhöht. Daher lohnt es
-sich, einen kurzen Blick auf dieses Plugin zu werfen. Falls es noch
-nicht installiert ist, kann es über den Scripts and Plugins Manager
-leicht nachinstalliert werden.
+Man muss wissen, dass hier ein loser Zusammenhang herrscht. Verringert
+man die Partikelgröße, dann sollte man auch die Zeitschritte verringern.
+Eine feste Formel gibt es dafür aber nicht. Der Grund dafür ist, dass
+kleinere Partikel noch leichter Hindernisse überspringen oder
+gegenseitig ineinander eindringen können, als dass bei größeren
+Partikeln der Fall ist. Grob lässt sich sagen: Halbiert man die Particle
+Size, dann sollte man auch die Step Size halbieren.
 
-Die Grundidee des Selections-Plugins ist es, Objekte in logischen
-Gruppen zusammenzufassen. Es kann noch ein bisschen mehr, zum Beispiel
-Locking oder Ausblenden der Objekte, die für unseren Zweck aber nicht
-ganz so interessant sind -- und überdies selbst\-er\-klä\-rend.
-
-Die Bedienung ist recht einfach: Die Objekte, die man zusammenfassen
-will, markiert man und klickt dann unter "<Selections"> auf "<New">. Das
-erstellt eine neue Gruppe, die automatisch all diese Objekte enthält. Da
-jedoch nicht ganz offensichtlich ist, dass dies der Fall ist, kann mit
-einem Doppelklick auf den Namen des Selection Sets ein neues
-Dialogfenster mit einer Übersicht öffnen. In diesem neuen Dialog können
-auch Objekte aus der Gruppe herausgenommen werden. Genauer gesagt: Was
-hier markiert ist, gehört zur Gruppe.
-
-Ein möglicher Anwendungsfall: Man hat sehr viele Kisten und möchte diese
-später alle auf die gleiche Weise als Soft Body verwenden. Dazu fasst
-man sie vorab zu einem Selection Set zusammen.
+\fpic{gfx/skizzen/zshg-groesse-step.pdf}{fig:zshg-groesse-step}
+{Größere Partikel kollidieren noch, während kleinere Partikel in
+derselben Simulation wieder durch das Objekt tunneln.}
 %}}}
 
 %}}}
@@ -410,19 +399,19 @@ Ergebnis aussehen kann.
 {Ein erster Testrender der Szene mit transparentem Hintergrund.}
 %}}}
 
-\subsection{Weiterführende Optionen zum letzten Beispiel}
+\subsection{Erweiterte Optionen zum letzten Beispiel}
 %{{{
 Was es sonst noch so die bis jetzt besprochenen Objekte betreffend gibt.
 %}}}
 
 \subsection{Mehr Flüssigkeit dazugießen (\fachb{Emitters})}
 %{{{
-Kommt noch.
+TODO:
 %}}}
 
-\subsection{Weiterführende Optionen zum letzten Beispiel}
+\subsection{Erweiterte Optionen zum letzten Beispiel}
 %{{{
-dito
+TODO:
 %}}}
 
 %}}}
@@ -431,14 +420,56 @@ dito
 \pagebreak
 \section{Simulation deformierbarer Körper}
 %{{{
-dito... Feder-Masse-System und so
+TODO: Feder-Masse-System und so
 %}}}
 
 
 \pagebreak
-\section{Texturieren und Rendern}
+\section{Weiterführende Techniken}
 %{{{
-Raster-Renderer empfehlen, Grid für den Raytracer
+
+\subsection{\fachb{Selection Sets} zur Gruppierung}
+%{{{
+Mit Version~0.6.6 der \fluidsim wurde eine Integration mit dem
+Selections-Plugin von \aoi geschaffen. Das ist insofern eine große
+Vereinfachung, als damit massenhaft Objekten Werte zugeordnet werden
+können. Außerdem wird die Übersicht erheblich erhöht. Daher lohnt es
+sich, einen kurzen Blick auf dieses Plugin zu werfen. Falls es noch
+nicht installiert ist, kann es über den Scripts and Plugins Manager
+leicht nachinstalliert werden.
+
+Die Grundidee des Selections-Plugins ist es, Objekte in logischen
+Gruppen zusammenzufassen. Es kann noch ein bisschen mehr, zum Beispiel
+Locking oder Ausblenden der Objekte, die für unseren Zweck aber nicht
+ganz so interessant sind -- und überdies selbst\-er\-klä\-rend.
+
+Die Bedienung ist recht einfach: Die Objekte, die man zusammenfassen
+will, markiert man und klickt dann unter "<Selections"> auf "<New">. Das
+erstellt eine neue Gruppe, die automatisch all diese Objekte enthält. Da
+jedoch nicht ganz offensichtlich ist, dass dies der Fall ist, kann mit
+einem Doppelklick auf den Namen des Selection Sets ein neues
+Dialogfenster mit einer Übersicht öffnen. In diesem neuen Dialog können
+auch Objekte aus der Gruppe herausgenommen werden. Genauer gesagt: Was
+hier markiert ist, gehört zur Gruppe.
+
+Ein möglicher Anwendungsfall: Man hat sehr viele Kisten und möchte diese
+später alle auf die gleiche Weise als Soft Body verwenden. Dazu fasst
+man sie vorab zu einem Selection Set zusammen.
+
+TODO: Explizites Beispiel
+%}}}
+
+\subsection{Texturieren und Rendern}
+%{{{
+TODO: Raster-Renderer empfehlen, Grid für den Raytracer und Möglichkeit,
+IsoSurfaces bei selbigem auszuschalten
+%}}}
+
+\subsection{Animation}
+%{{{
+TODO:
+%}}}
+
 %}}}
 
 
