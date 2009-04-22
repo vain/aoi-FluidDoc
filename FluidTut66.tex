@@ -1,3 +1,5 @@
+% Präambel
+%{{{
 % Basics
 \documentclass[12pt,a4paper]{scrartcl}
 \usepackage[ngerman]{babel}
@@ -33,11 +35,14 @@
 
 % Befehle nur für dieses Dokument
 \input{customcommands}
+%}}}
 
 
 \begin{document}
 
+
 % Titelseite mit Copyleft
+%{{{
 \author{TroY \\ \url{http://www.uninformativ.de}}
 \title{\fluidsim 0.6.6 \\ mit Art of Illusion}
 \date{April 2009}
@@ -56,17 +61,21 @@
 \end{center}
 
 \pagebreak
-
+%}}}
 
 % Inhaltsverzeichnis
+%{{{
 \tableofcontents
 \thispagestyle{empty}
 \pagebreak
+%}}}
 
 
 % Dokument
-
 \section{Einleitung}
+%{{{
+
+%{{{
 Bereits seit 2005 arbeitet \deltor an einem Plugin zur Physiksimulation,
 was zu Beginn ein reines Plugin für \blender werden sollte. Er entdeckte
 dann zwar recht bald, dass in dieser Hinsicht bereits andere
@@ -96,8 +105,10 @@ sodass spätestens jetzt eine Aktualisierung notwendig wurde.
 Es sei angemerkt, dass dies keine offizielle Dokumentation ist. Dennoch
 will ich versuchen, die Vorgänge so genau wie möglich darzustellen und
 auf möglichst alle Optionen einzugehen.
+%}}}
 
 \subsection{Installation}
+%{{{
 Die Installation gestaltet sich denkbar einfach: Man besucht \deltor's
 Blog, sucht den jeweils aktuellen Link und lädt eine Datei namens
 \texttt{Physics.jar} herunter. Diese Datei muss dann in den Unterordner
@@ -108,8 +119,10 @@ in der Version 2.7.2 verwenden. Für den Fall, dass \aoi noch gar nicht
 installiert ist, kann man es sich unter folgender URL herunterladen:
 
 \url{http://www.artofillusion.org}
+%}}}
 
 \subsection{Funktion und Einsatzzweck der Simulation}
+%{{{
 Wie der Name schon vermuten lässt, ist der primäre Zweck, Flüssigkeiten
 zu simulieren. Diese entstehen in sogenannten \fachb{Emitters} und
 interagieren dann mit als \fachb{Boundary} definierten Objekten in der
@@ -155,10 +168,17 @@ Ein bisschen Zukunftsmusik ist in diesen Beispielen allerdings noch
 enthalten: Im Moment beherrscht das Plugin noch keine Reibung.
 
 Nichtsdestotrotz: Viel Spaß!
+%}}}
+
+%}}}
+
 
 \pagebreak
 \section{Grundlagen}
+%{{{
+
 \subsection{Animationen und \fachb{Baking}}
+%{{{
 In der Einleitung fiel bereits das entscheidende Stichwort: Animation.
 Die \fluidsim beschreibt Vorgänge, die sich zusammen mit der Zeit
 verändern. Man kommt also nicht umhin, eine Animation zu erstellen
@@ -186,8 +206,10 @@ Die Daten werden dabei in einer Datei zwischengespeichert. Man sollte
 hier nicht zu geizig sein und sich mit einem fast vollen Datenträger
 begnügen: Diese Datei kann bei langen Simulationen mehrere hundert
 Megabyte groß werden.
+%}}}
 
 \subsection{Zeitschritte und Partikelgrößen}
+%{{{
 Eine physikalische Simulation läuft am Computer immer "<diskretisiert">
 ab, das heißt, es gibt nur eine endliche Anzahl fester Zeitpunkte, die
 berechnet werden. Dazwischen gibt es zwangsweise "<Lücken">. Daraus
@@ -213,8 +235,10 @@ sie zu groß, simuliert man irgendwann Fußbälle.
 
 Bei beiden Parametern sind Werte voreingestellt, die für einfache
 Beispiele ausreichend sind.
+%}}}
 
 \subsection{\fachb{Selection Sets} zur Gruppierung}
+%{{{
 Mit Version 0.6.6 der \fluidsim wurde eine Integration mit dem
 Selections-Plugin von \aoi geschaffen. Das ist insofern eine große
 Vereinfachung, als damit massenhaft Objekten Werte zugeordnet werden
@@ -240,18 +264,26 @@ hier markiert ist, gehört zur Gruppe.
 Ein möglicher Anwendungsfall: Man hat sehr viele Kisten und möchte diese
 später alle auf die gleiche Weise als Soft Body verwenden. Dazu fasst
 man sie vorab zu einem Selection Set zusammen.
+%}}}
+
+%}}}
 
 
 \pagebreak
 \section{Flüssigkeitssimulation}
+%{{{
+
+%{{{
 Die konkrete Anwendung der \fluidsim erklärt man wohl am besten anhand
 eines Beispiels. Im ersten Teil soll unser Ziel sein,
 \itA
 	\item ein gefülltes Becken mit Wasser zu erstellen
 	\item und dann noch weiteres Wasser dazuzugießen.
 \itE
+%}}}
 
 \subsection{Das gefüllte Becken (\fachb{Boundaries} und \fachb{Fluids})}
+%{{{
 Zuerst werden wir das Becken als Boundary definieren. Seit einiger Zeit
 unterstützt das Plugin sogenannte \fachb{Poly Boundaries}, also Objekte,
 deren \emph{Flächen} als Hindernis benutzt werden können.\footnote{In
@@ -343,26 +375,41 @@ etwas, sollte man auch schon die ersten Anzeichen von Leben in der
 Flüssigkeit entdecken können.
 
 \addpic{Ein erster Testrender}
+%}}}
 
 \subsection{Weiterführende Optionen zum letzten Beispiel}
+%{{{
 Was es sonst noch so die bis jetzt besprochenen Objekte betreffend gibt.
+%}}}
 
 \subsection{Mehr Flüssigkeit dazugießen (\fachb{Emitters})}
+%{{{
+Kommt noch.
+%}}}
 
 \subsection{Weiterführende Optionen zum letzten Beispiel}
+%{{{
 dito
+%}}}
+
+%}}}
 
 
 \pagebreak
 \section{Simulation deformierbarer Körper}
+%{{{
 dito... Feder-Masse-System und so
+%}}}
 
 
 \pagebreak
 \section{Texturieren und Rendern}
+%{{{
 Raster-Renderer empfehlen, Grid für den Raytracer
+%}}}
 
 
 \end{document}
 
-% vim: set tw=72 :
+
+% vim: set tw=72 foldmethod=marker :
