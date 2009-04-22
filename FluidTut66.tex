@@ -1,7 +1,7 @@
 % Präambel
 %{{{
 % Basics
-\documentclass[12pt,a4paper]{scrartcl}
+\documentclass[10pt,DIV=14,a4paper]{scrartcl}
 \usepackage[ngerman]{babel}
 \usepackage[utf8x]{inputenc}
 
@@ -190,7 +190,9 @@ zu machen. Im Normalfall muss man dazu nichts weiter tun, als den Rand
 am unteren Ende des \aoi-Hauptfensters mit der Maus ein Stück nach oben
 zu ziehen.
 
-\addpic{Zeitleiste}
+\fpic{gfx/shots/TimeScore.png}{fig:timescore}
+{\aoi mit sichtbarer Zeitleiste. An der orange markierten Stelle muss
+gezogen werden, der grüne Schieber dient zum Setzen des Zeitpunktes.}
 
 Mit dieser Leiste ist es möglich, innerhalb einer Animation zu
 navigieren.
@@ -225,7 +227,9 @@ gewählt, dauert es einfach zu lange, bis der Baking-Vorgang beendet
 ist.\footnote{Eine schöne Anekdote zu diesem Thema findet sich übrigens
 hier: \url{http://xkcd.com/505/}}
 
-\addpic{Partikel überspringt Hindernis}
+\fpic{gfx/skizzen/diskrfehler.pdf}{fig:diskrfehler}
+{Ein simuliertes Partikel übersieht ein Hindernis durch eine zu große
+Step Size.}
 
 Die Flüssigkeiten werden intern als kleine Partikel fester Größe
 modelliert, anhand des Parameters \fachb{Particle Size}. Wie man schon
@@ -294,7 +298,8 @@ Szene bringen und dieses unverändert nutzen können. Tun wir das also und
 erstellen uns ein sehr rudimentäres Becken. Um die Übersicht zu wahren,
 nennen wir es um in "<Becken">.
 
-\addpic{Becken}
+\fpic{gfx/shots/Becken1.png}{fig:becken1}
+{Ein einfaches Becken.}
 
 Wie eingangs erwähnt, lassen sich Objekte als Fluid definieren und
 werden damit komplett flüssig. Genau das wollen wir jetzt nutzen: Wir
@@ -302,7 +307,8 @@ erstellen einen weiteren, einfachen PolyMesh-Quader, den wir in das
 Becken setzen. Noch ist er solide, aber das wird sich bald ändern. Wir
 nennen ihn "<Fuellung">.
 
-\addpic{Becken mit solider Füllung}
+\fpic{gfx/shots/Becken2.png}{fig:becken2}
+{Das Becken mit (noch) solider Füllung.}
 
 Um Objekten physikalische Eigenschaften zuordnen zu können, muss zuerst
 eine Instanz des Fluid-Plugins zur Szene hinzugefügt werden. Man wählt
@@ -332,13 +338,14 @@ Rechtschreibfehler stehen weiter unten auf der "<TODO">-Liste...} und
 klicken auf "<Set To Selection">. Es werden jetzt ein paar mehr Optionen
 zugänglich, für unser Beispiel sind diese aber optimal.
 
-\addpic{Becken im Plugin definiert}
-
 Als nächstes erklären wir den inneren Quader zur
 Flüssigkeit.\rand{Fluid} Auch dieser Vorgang gestaltet sich ziemlich
 einfach: Das Objekt namens "<Fuellung"> aus der mittleren Liste wählen,
 auf "<Set To Selection"> klicken und diesmal weisen wir ihm den Typ
 "<Fluid"> zu. Das war's.
+
+\fpic{gfx/shots/Becken-Definitionen.png}{fig:becken-def}
+{Die ersten zwei Objekte sind im Plugin definiert.}
 
 Jetzt können wir auch schon den ersten "<Backvorgang">
 starten.\rand{Baking} Dazu wechseln wir auf den Tab "<Baking">. Hier
@@ -374,7 +381,33 @@ einem Klick auf "<OK"> und bewegt danach den Schieber in der Zeitleiste
 etwas, sollte man auch schon die ersten Anzeichen von Leben in der
 Flüssigkeit entdecken können.
 
-\addpic{Ein erster Testrender}
+Bevor man ein halbwegs sinnvolles Bild rendern kann, heißt es jedoch:
+
+\itA
+	\item Licht muss in die Szene. Dieser Schritt ist trivial und zur
+	Not schlage man im Handbuch\footnote{Hier die deutsche Übersetzung
+	von Vidiot: \\
+	\url{http://www.uninformativ.de/tutorials/Vidiot/AoI_Manual_2_6_ger/contents_de.html}}
+	nach. ;-)
+
+	\item Man will vermutlich das PolyMesh-Objekt "<Fuellung">
+	verstecken. Der Grund dafür ist, dass das Setzen des Objektes auf
+	"<Fluid"> das originale Objekt nicht beeinflusst. Es dient quasi nur
+	als Partikelquelle und ist daher im Normalfall im Weg.
+
+	Keine Sorge, die Flüssigkeit wird dadurch nicht unsichtbar, denn
+	diese ist Teil des Objektes "<PhysicsObject 1">. Würde man also
+	tatsächlich die Flüssigkeit \emph{nicht} rendern wollen, so müsste
+	man das gesamte Physik-Objekt verstecken. Im Moment ist es noch
+	nicht möglich, nur einzelne Teile des Physik-Objektes zu verstecken.
+
+\itE
+
+Abbildung~\ref{fig:render-becken1} zeigt dann, wie ein mögliches
+Ergebnis aussehen kann.
+
+\fpic{gfx/renders/Becken1.png}{fig:render-becken1}
+{Ein erster Testrender der Szene mit transparentem Hintergrund.}
 %}}}
 
 \subsection{Weiterführende Optionen zum letzten Beispiel}

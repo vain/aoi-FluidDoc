@@ -7,5 +7,15 @@
 
 \newcommand{\addpic}[1]{\begin{center}\textbf{BILD HINZUFÜGEN: #1}\end{center}}
 
+\usepackage[font={footnotesize},labelfont={footnotesize,bf},labelsep=endash]{caption}
+\newcommand{\fpic}[3]
+{
+	\begin{figure}[htb]
+	\centering
+	\includegraphics[width=0.5\textwidth]{#1}
+	\caption{#3\label{#2}}
+	\end{figure}
+}
+
 \newcommand{\fachb}[1]{\textit{#1}}
 \newcommand{\rand}[1]{\marginline{\tiny{\texttt{#1}}}}
