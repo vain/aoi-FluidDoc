@@ -94,8 +94,8 @@ Blog verlinkt:
 \url{http://delt0r.blogspot.com/}
 
 Da es an Dokumentation jedoch ein bisschen mangelt, die Informationen in
-Foren verstreut sind und nicht jeder die Zeit hat, sich mittels "<Trial
-and Error"> einzuarbeiten, entstand dieser Guide, um den Einstieg etwas
+Foren verstreut sind und nicht jeder die Zeit hat, sich mittels ">Trial
+and Error"< einzuarbeiten, entstand dieser Guide, um den Einstieg etwas
 zu erleichtern. Eigentlich ist das schon die zweite Anleitung dieser
 Art, denn bereits von eineinhalb Jahren habe ich eine solche
 geschrieben. Bis vor kurzem war sie noch zu gebrauchen, aber Anfang
@@ -143,15 +143,15 @@ später näher erläutert. Eine richtige Simulation starrer Körper
 (\fachb{Rigid Bodies}) wird es erst in Zukunft geben.
 
 Das Plugin ist dabei auch tatsächlich eine \emph{Simulation}. Leider
-steht das in einem gewissen Widerspruch zu dem "<Art"> in \aoi.
+steht das in einem gewissen Widerspruch zu dem ">Art"< in \aoi.
 Simulationen versuchen, der Realität ähnlich zu sein, was zur Folge hat,
 dass man sie nur sehr schwer kontrollieren kann. Es ist beispielsweise
 nicht einfach, ein fertiges Bild, das das Anstoßen zweier Bierkrüge,
 wobei der Inhalt des einen in den anderen überschwappt, mit der
-\fluidsim "<mal eben"> etwas aufzupeppen. Stattdessen muss eine
+\fluidsim ">mal eben"< etwas aufzupeppen. Stattdessen muss eine
 Animation erstellt werden, welche die Bierkrüge im Vorfeld genau so
 bewegt, dass die in ihnen enthaltene Flüssigkeit dann auch tatsächlich
-im richtigen Moment "<schwappt">.  Das ist nicht einfach, da sich die
+im richtigen Moment ">schwappt"<.  Das ist nicht einfach, da sich die
 Flüssigkeit realitätsgetreu verhält und man die Krüge nicht mit den
 Händen \emph{anfassen} kann. Dadurch wird das Einschätzen der
 vorhandenen Massen und wirkenden Kräfte zu keiner leichten Aufgabe.
@@ -218,9 +218,9 @@ Megabyte groß werden.
 
 \subsection{Zeitschritte und Partikelgrößen}
 %{{{
-Eine physikalische Simulation läuft am Computer immer "<diskretisiert">
+Eine physikalische Simulation läuft am Computer immer ">diskretisiert"<
 ab, das heißt, es gibt nur eine endliche Anzahl fester Zeitpunkte, die
-berechnet werden. Dazwischen gibt es zwangsweise "<Lücken">. Daraus
+berechnet werden. Dazwischen gibt es zwangsweise ">Lücken"<. Daraus
 folgt natürlich, dass eine Simulation dann genauer wird, wenn diese
 Zeitpunkte näher beeinander liegen. Der Abstand zweier solcher
 Zeitpunkte wird im Plugin \fachb{Step Size} genannt.
@@ -228,7 +228,7 @@ Zeitpunkte wird im Plugin \fachb{Step Size} genannt.
 Man muss hier einen guten Kompromiss finden: Ist die Step Size zu groß,
 dann ist die Simulation zwar sehr schnell berechnet, aber höchst
 ungenau. Es kann dann passieren, dass Flüssigkeitspartikel ihre
-Hindernisse "<überspringen">. Wird die Step Size dagegen zu klein
+Hindernisse ">überspringen"<. Wird die Step Size dagegen zu klein
 gewählt, dauert es einfach zu lange, bis der Baking-Vorgang beendet
 ist.\footnote{Eine schöne Anekdote zu diesem Thema findet sich übrigens
 hier: \url{http://xkcd.com/505/}}
@@ -285,7 +285,7 @@ Objektes als Grenzen, was einiges an Zwischenarbeit erforderte.} Das
 heißt für uns, dass wir ganz komfortabel ein PolyMesh-Objekt in die
 Szene bringen und dieses unverändert nutzen können. Tun wir das also und
 erstellen uns ein sehr rudimentäres Becken. Um die Übersicht zu wahren,
-nennen wir es um in "<Becken">.
+nennen wir es um in ">Becken"<.
 
 \fpic{gfx/shots/Becken1.png}{fig:becken1}
 {Ein einfaches Becken.}
@@ -294,7 +294,7 @@ Wie eingangs erwähnt, lassen sich Objekte als Fluid definieren und
 werden damit komplett flüssig. Genau das wollen wir jetzt nutzen: Wir
 erstellen einen weiteren, einfachen PolyMesh-Quader, den wir in das
 Becken setzen. Noch ist er solide, aber das wird sich bald ändern. Wir
-nennen ihn "<Fuellung">.
+nennen ihn ">Fuellung"<.
 
 \fpic{gfx/shots/Becken2.png}{fig:becken2}
 {Das Becken mit (noch) solider Füllung.}
@@ -312,45 +312,45 @@ erweitern.
 Ein Doppelklick auf das neu erstellte Objekt in der Objektliste öffnet
 seine Eigenschaften. Hier wird sich nun die ganze Magie abspielen.
 
-Wir markieren das Objekt "<Becken"> in der mittleren
+Wir markieren das Objekt ">Becken"< in der mittleren
 Liste.\rand{Boundary} Um einem
 Objekt Eigenschaften zuzuweisen, müssen wir es erst in die aktuelle
-"<Auswahl"> übernehmen. Die Begrifflichkeiten kollidieren hier leider
+">Auswahl"< übernehmen. Die Begrifflichkeiten kollidieren hier leider
 etwas, denn diese Auswahl hat nichts mit den Selection Sets zu tun -- zu
 denen kommen wir erst später. Die Auswahl, um die es hier geht, bestimmt
 nur jene Objekte, auf die die gesetzten Parameter wirken. Man könnte in
 der mittleren Liste also auch mehrere Objekte auf einmal markieren und
 diese damit gleichzeitig bearbeiten.
 
-Aus der rechten Dropdown-Liste wählen wir nun "<Boundry">\footnote{Die
-Rechtschreibfehler stehen weiter unten auf der "<TODO">-Liste...} und
-klicken auf "<Set To Selection">. Es werden jetzt ein paar mehr Optionen
+Aus der rechten Dropdown-Liste wählen wir nun ">Boundry"<\footnote{Die
+Rechtschreibfehler stehen weiter unten auf der ">TODO"<-Liste...} und
+klicken auf ">Set To Selection"<. Es werden jetzt ein paar mehr Optionen
 zugänglich, für unser Beispiel sind diese aber optimal.
 
 Als nächstes erklären wir den inneren Quader zur
 Flüssigkeit.\rand{Fluid} Auch dieser Vorgang gestaltet sich ziemlich
-einfach: Das Objekt namens "<Fuellung"> aus der mittleren Liste wählen,
-auf "<Set To Selection"> klicken und diesmal weisen wir ihm den Typ
-"<Fluid"> zu. Das war's.
+einfach: Das Objekt namens ">Fuellung"< aus der mittleren Liste wählen,
+auf ">Set To Selection"< klicken und diesmal weisen wir ihm den Typ
+">Fluid"< zu. Das war's.
 
 \fpic{gfx/shots/Becken-Definitionen.png}{fig:becken-def}
 {Die ersten zwei Objekte sind im Plugin definiert.}
 
-Jetzt können wir auch schon den ersten "<Backvorgang">
-starten.\rand{Baking} Dazu wechseln wir auf den Tab "<Baking">. Hier
+Jetzt können wir auch schon den ersten ">Backvorgang"<
+starten.\rand{Baking} Dazu wechseln wir auf den Tab ">Baking"<. Hier
 kann man einen Zielort für die temporäre Datei angeben, der Standardwert
 sollte aber vorübergehend ausreichen. Wichtig ist: Wenn man von vorne
 mit der Simulation anfangen will, sollte man immer die beiden Knöpfe
 betätigen:
 
 \itA
-	\item "<\textbf{Clear Object Cache}">: Dieser Knopf signalisiert dem
+	\item ">\textbf{Clear Object Cache}"<: Dieser Knopf signalisiert dem
 	Plugin, dass es bitte alle zwischengespeicherten Informationen über
 	die vorhandenen Objekte vergessen möge, vorallem deren Geometrie.
 	Das heißt, diesen Knopf muss man auch betätigen, wenn man im
 	Nachhinein die Größe des Beckens ändern wollte.
 
-	\item "<\textbf{Reset Simulation}">: Dagegen sorgt dieser zweite
+	\item ">\textbf{Reset Simulation}"<: Dagegen sorgt dieser zweite
 	Knopf dafür, dass sowohl die Zeit auf Null zurückgesetzt als auch
 	alle bisher berechneten Bewegungen gelöscht werden. Das muss man
 	also zusätzlich auslösen, wenn man sicherstellen will, dass die
@@ -361,12 +361,12 @@ betätigen:
 Im unteren Feld können wir noch eingeben, zu welchem Zeitpunkt die
 Simulation enden soll. Dieser Zeitpunkt ist \emph{absolut}, das heißt,
 er bestimmt \emph{nicht die Dauer} der Simulation. Wir schreiben also
-eine "<2"> in das Feld, da wir von Sekunde 0 bis Sekunde 2 simulieren
+eine ">2"< in das Feld, da wir von Sekunde 0 bis Sekunde 2 simulieren
 wollen.
 
-Nach einem Klick auf "<Bake"> erscheint kurz ein Fortschrittsbalken, der
+Nach einem Klick auf ">Bake"< erscheint kurz ein Fortschrittsbalken, der
 aber kurz darauf wieder verschwindet. Verlässt man nun das Plugin mit
-einem Klick auf "<OK"> und bewegt danach den Schieber in der Zeitleiste
+einem Klick auf ">OK"< und bewegt danach den Schieber in der Zeitleiste
 etwas, sollte man auch schon die ersten Anzeichen von Leben in der
 Flüssigkeit entdecken können.
 
@@ -379,13 +379,13 @@ Bevor man ein halbwegs sinnvolles Bild rendern kann, heißt es jedoch:
 	\url{http://www.uninformativ.de/tutorials/Vidiot/AoI_Manual_2_6_ger/contents_de.html}}
 	nach. ;-)
 
-	\item Man will vermutlich das PolyMesh-Objekt "<Fuellung">
+	\item Man will vermutlich das PolyMesh-Objekt ">Fuellung"<
 	verstecken. Der Grund dafür ist, dass das Setzen des Objektes auf
-	"<Fluid"> das originale Objekt nicht beeinflusst. Es dient quasi nur
+	">Fluid"< das originale Objekt nicht beeinflusst. Es dient quasi nur
 	als Partikelquelle und ist daher im Normalfall im Weg.
 
 	Keine Sorge, die Flüssigkeit wird dadurch nicht unsichtbar, denn
-	diese ist Teil des Objektes "<PhysicsObject 1">. Würde man also
+	diese ist Teil des Objektes ">PhysicsObject 1"<. Würde man also
 	tatsächlich die Flüssigkeit \emph{nicht} rendern wollen, so müsste
 	man das gesamte Physik-Objekt verstecken. Im Moment ist es noch
 	nicht möglich, nur einzelne Teile des Physik-Objektes zu verstecken.
@@ -449,7 +449,7 @@ Locking oder Ausblenden der Objekte, die für unseren Zweck aber nicht
 ganz so interessant sind -- und überdies selbst\-er\-klä\-rend.
 
 Die Bedienung ist recht einfach: Die Objekte, die man zusammenfassen
-will, markiert man und klickt dann unter "<Selections"> auf "<New">. Das
+will, markiert man und klickt dann unter ">Selections"< auf ">New"<. Das
 erstellt eine neue Gruppe, die automatisch all diese Objekte enthält. Da
 jedoch nicht ganz offensichtlich ist, dass dies der Fall ist, kann mit
 einem Doppelklick auf den Namen des Selection Sets ein neues
