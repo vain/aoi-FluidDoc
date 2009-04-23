@@ -251,15 +251,31 @@ Beispiele ausreichend sind.
 
 Man muss wissen, dass hier ein loser Zusammenhang herrscht. Verringert
 man die Partikelgröße, dann sollte man auch die Zeitschritte verringern.
-Eine feste Formel gibt es dafür aber nicht. Der Grund dafür ist, dass
-kleinere Partikel noch leichter Hindernisse überspringen oder
-gegenseitig ineinander eindringen können, als dass bei größeren
-Partikeln der Fall ist. Grob lässt sich sagen: Halbiert man die Particle
-Size, dann sollte man auch die Step Size halbieren.
+Eine feste Formel hierfür anzugeben, wäre aber nicht sonderlich
+praktikabel. Der Grund für diesen Zusammenhang ist, dass kleinere
+Partikel noch leichter Hindernisse überspringen oder gegenseitig
+ineinander eindringen können, als dass bei größeren Partikeln der Fall
+ist. Grob lässt sich sagen: Halbiert man die Particle Size, dann sollte
+man auch die Step Size halbieren.
 
 \fpic{gfx/skizzen/zshg-groesse-step.pdf}{fig:zshg-groesse-step}
-{Größere Partikel kollidieren noch, während kleinere Partikel in
-derselben Simulation wieder durch das Objekt tunneln.}
+{Bei größeren Partikeln wird noch eine Kollision erkannt, während
+kleinere Partikel in derselben Simulation wieder durch das Objekt
+tunneln.}
+
+In Abbildung~\ref{fig:zshg-groesse-step} wird auch noch einmal die
+grundsätzliche Bedeutung der Step Size deutlich: Auch die großen
+Partikel würden durch das Hindernis tunneln, wenn sie sich schneller
+bewegen würden. Eine höhere Geschwindigkeit heißt, dass die Partikel pro
+Zeitschritt eine größere Distanz zurücklegen, wodurch natürlich die
+Lücken zwischen ihnen größer werden. Damit steigt die Chance, dass ein
+Teilchen ein Hindernis nicht wahrnimmt. Man muss also auch dann, wenn
+man in einer Simulation hohe Geschwindigkeiten hat, eine kleine Step
+Size wählen.
+
+In ferner Zukunft soll es dafür eine Lösung geben und zwar eine adaptive
+Step Size. Inwiefern das funktionieren und wann es überhaupt eingebaut
+wird, ist aber noch offen.
 %}}}
 
 %}}}
