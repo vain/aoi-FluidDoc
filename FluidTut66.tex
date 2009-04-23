@@ -301,7 +301,7 @@ unterstützt das Plugin sogenannte \fachb{Poly Boundaries}, also Objekte,
 deren \emph{Flächen} als Hindernis benutzt werden können.\footnote{In
 älteren Versionen war das anders. Früher galten die Punkte eines
 Objektes als Grenzen, was einiges an Zwischenarbeit erforderte.} Das
-heißt für uns, dass wir ganz komfortabel ein PolyMesh-Objekt in die
+heißt für uns, dass wir ganz komfortabel ein \PolyMesh-Objekt in die
 Szene bringen und dieses unverändert nutzen können. Tun wir das also und
 erstellen uns ein sehr rudimentäres Becken. Um die Übersicht zu wahren,
 nennen wir es um in ">Becken"<.
@@ -311,7 +311,7 @@ nennen wir es um in ">Becken"<.
 
 Wie eingangs erwähnt, lassen sich Objekte als Fluid definieren und
 werden damit komplett flüssig. Genau das wollen wir jetzt nutzen: Wir
-erstellen einen weiteren, einfachen PolyMesh-Quader, den wir in das
+erstellen einen weiteren, einfachen \PolyMesh-Quader, den wir in das
 Becken setzen. Noch ist er solide, aber das wird sich bald ändern. Wir
 nennen ihn ">Fuellung"<.
 
@@ -398,7 +398,7 @@ Bevor man ein halbwegs sinnvolles Bild rendern kann, heißt es jedoch:
 	\url{http://www.uninformativ.de/tutorials/Vidiot/AoI_Manual_2_6_ger/contents_de.html}}
 	nach. ;-)
 
-	\item Man will vermutlich das PolyMesh-Objekt ">Fuellung"<
+	\item Man will vermutlich das \PolyMesh-Objekt ">Fuellung"<
 	verstecken. Der Grund dafür ist, dass das Setzen des Objektes auf
 	">Fluid"< das originale Objekt nicht beeinflusst. Es dient quasi nur
 	als Partikelquelle und ist daher im Normalfall im Weg.
@@ -418,17 +418,82 @@ Ergebnis aussehen kann.
 {Ein erster Testrender der Szene mit transparentem Hintergrund.}
 %}}}
 
-\subsection{Erweiterte Optionen zum letzten Beispiel}
+\subsection{Erweiterte Optionen zum vorigen Beispiel}
 %{{{
 TODO: Was es sonst noch so die bis jetzt besprochenen Objekte betreffend gibt.
 %}}}
 
 \subsection{Gezielt Flüssigkeit dazugießen (\fachb{Emitters})}
 %{{{
-TODO: Wie man Emitter grundsätzlich nutzt
+\fachb{Emitters} sind wie Fluids eine Möglichkeit, um Flüssigkeit
+entstehen zu lassen. Anders als letztere können Emitters aber eher als
+">Wasserhahn"< angesehen werden: Aus ihnen strömt Flüssigkeit mit einer
+festen Geschwindigkeit in eine bestimmte Richtung.
+
+Es ist nun so, dass Emitters noch ältere Programmteile sind und daher
+vertexbasiert arbeiten. Für uns bedeutet das in erster Linie, dass wir
+ein bisschen mehr Arbeit haben und zuerst einen ganz kurzen Ausflug in
+die Geometrie machen müssen. Denn vorab muss geklärt werden, welche
+Bedeutung ">Normalen"< im Allgemeinen und für die \fluidsim im
+Speziellen haben.
+
+\fpic{gfx/shots/Wings-Normalen.png}{fig:normalen1}
+{Ein Screenshot aus Wings3D, hier lassen sich die Normalen eines Körpers
+direkt anzeigen.}
+
+Abbildung~\ref{fig:normalen1} zeigt einen einfachen Zylinder. Zu sehen
+sind als kleine blaue Striche außerdem die Normalen: Die Normale einer
+Fläche ist ein Vektor, der senkrecht auf dieser Fläche steht.
+
+TODO: Genauer!
+
+Wir werden gleich den ersten Emitter erstellen, welcher ein einfaches
+\TriMesh sein wird. Wie bereits erwähnt, arbeiten Emitters vertexbasiert.
+Das heißt, dass jeder Punkt in unserem \TriMesh Flüssigkeit erzeugen
+wird. Doch in welche Richtung? Hier kommen jetzt die Normalen ins Spiel.
+Normalen sind zwar eigentlich auf Flächen definiert, lassen sich aber
+relativ einfach auf die angrenzenden Punkte übertragen. Man kann die
+Normale für einen Punkt zum Beispiel bilden, indem man die Normalen
+aller angrenzenden Flächen mittelt. Damit hat man eine ungefähre
+Richtung definiert, entlang welcher unser Wasser fließen wird.
+
+\aoi beherrscht Mechanismen, um in einem Mesh Vertexnormalen automatisch
+aus Flächennormalen erzeugen zu können. Dafür gibt es verschiedene
+Vorgehensweisen, aber nur eine davon garantiert uns maximale Kontrolle:
+Wir müssen ein \TriMesh mit ">Shading"< als ">Smoothing Method"<
+erstellen.
+
+Der schnellste Weg, das zu tun, ist folgender:
+\itA
+	\item Wir klicken doppelt auf das \PolyMesh-Icon (sic!) und wählen
+	dort als Template ein ">Flat Mesh"< aus. Die Größe setzen wir zum
+	Beispiel auf 5x5. Die ">Smoothing Method"< in \emph{diesem} Dialog
+	muss noch auf ">None"< gesetzt werden.
+
+	\item Nachdem wir ein solches Objekt erstellt haben, wandeln wir es
+	mit einem Rechtsklick in der Objektliste in ein \TriMesh um.
+
+	\item Jetzt können wir unter der Objektliste in den Eigenschaften
+	die ">Smoothing Method"< auf ">Shading"< setzen.
+
+	\item Da wir dieses Objekt gleich als Emitter setzen wollen, nennen
+	wir es auch so: ">Emitter"<.
+
+\itE
+
+Der Sinn dieses Umwegs ist folgender: Nur Shading errechnet korrekte
+Vertexnormalen \emph{ohne} die Geometrie des Körpers zu
+verändern.\footnote{Wer sich genauer dafür interessiert, kann sich
+einmal die Methode \texttt{getWireframeMesh()} in
+\texttt{TriangleMesh.java} des \aoi-Quelltextes ansehen.} Prinzipiell
+spräche also nichts dagegen, statt des \TriMesh's ein \PolyMesh zu
+verwenden -- leider entstehen bei letzteren manchmal falsch berechnete
+Vertexnormalen, was bei \TriMesh's nicht der Fall ist.
+
+TODO: Definition im Plugin
 %}}}
 
-\subsection{Erweiterte Optionen zum letzten Beispiel}
+\subsection{Erweiterte Optionen zum vorigen Beispiel}
 %{{{
 TODO: Normal Factor, ... 
 %}}}
