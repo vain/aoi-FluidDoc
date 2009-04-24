@@ -289,10 +289,10 @@ wird, ist aber noch offen.
 %{{{
 Die konkrete Anwendung der \fluidsim erklärt man wohl am besten anhand
 eines Beispiels. Im ersten Teil soll unser Ziel sein,
-\itA
-	\item ein gefülltes Becken mit Wasser zu erstellen
-	\item und dann noch weiteres Wasser dazuzugießen.
-\itE
+\enumA
+	\item ein gefülltes Becken mit Wasser zu erstellen,
+	\item Wasser aus einer Quelle herausfließen zu lassen.
+\enumE
 %}}}
 
 \subsection{Das gefüllte Becken (\fachb{Boundaries} und \fachb{Fluids})}
@@ -306,6 +306,10 @@ heißt für uns, dass wir ganz komfortabel ein \PolyMesh-Objekt in die
 Szene bringen und dieses unverändert nutzen können. Tun wir das also und
 erstellen uns ein sehr rudimentäres Becken. Um die Übersicht zu wahren,
 nennen wir es um in ">Becken"<.
+
+Eine kurze Randbemerkung: Primitive \aoi-Objekte, also Würfel, Kugeln
+oder Zylinder, können nicht als Hindernisse in der \fluidsim verwendet
+werden.
 
 \fpic{gfx/shots/Becken1.png}{fig:becken1}
 {Ein einfaches Becken.}
@@ -432,11 +436,11 @@ entstehen zu lassen. Anders als letztere können Emitters aber eher als
 festen Geschwindigkeit in eine bestimmte Richtung.
 
 Es ist nun so, dass Emitters noch ältere Programmteile sind und daher
-vertexbasiert arbeiten. Für uns bedeutet das in erster Linie, dass wir
-ein bisschen mehr Arbeit haben und zuerst einen ganz kurzen Ausflug in
-die Geometrie machen müssen. Denn vorab muss geklärt werden, welche
-Bedeutung ">Normalen"< im Allgemeinen und für die \fluidsim im
-Speziellen haben.
+vertexbasiert arbeiten.\rand{Normalen} Für uns bedeutet das in erster
+Linie, dass wir ein bisschen mehr Arbeit haben und zuerst einen ganz
+kurzen Ausflug in die Geometrie machen müssen. Denn vorab muss geklärt
+werden, welche Bedeutung ">Normalen"< im Allgemeinen und für die
+\fluidsim im Speziellen haben.
 
 \fpic{gfx/shots/Wings-Normalen.png}{fig:normalen1}
 {Ein Screenshot aus Wings3D, hier lassen sich die Normalen eines Körpers
@@ -444,9 +448,12 @@ direkt anzeigen.}
 
 Abbildung~\ref{fig:normalen1} zeigt einen einfachen Zylinder. Zu sehen
 sind als kleine blaue Striche außerdem die Normalen: Die Normale einer
-Fläche ist ein Vektor, der senkrecht auf dieser Fläche steht.
-
-TODO: Genauer!
+Fläche ist ein Vektor, der senkrecht auf dieser Fläche steht. Allerdings
+lassen sich nur auf Dreiecken sinnvoll Flächennormalen definieren, denn
+nur bei Dreiecken liegen alle Punkte immer in einer gemeinsamen Ebene.
+Ein Quadrat zum Beispiel kann ">in sich gekrümmt"< sein, wodurch nicht
+mehr all seine Eckpunkt in einer Ebene liegen -- damit ist keine
+eindeutige Flächennormale definierbar.
 
 Wir werden gleich den ersten Emitter erstellen, welcher ein einfaches
 \TriMesh sein wird. Wie bereits erwähnt, arbeiten Emitters vertexbasiert.
@@ -491,12 +498,43 @@ spräche also nichts dagegen, statt des \TriMesh's ein \PolyMesh zu
 verwenden -- leider entstehen bei letzteren manchmal falsch berechnete
 Vertexnormalen, was bei \TriMesh's nicht der Fall ist.
 
-TODO: Definition im Plugin
+Wenn dieses Objekt fertig ist, müssen wir es wieder der \fluidsim
+bekanntgeben.\rand{Objekte erstellen} Dazu erstellen wir erst ein
+Physik-Objekt um den Emitter herum und öffnen dann seine Eigenschaften.
+Wie gehabt wählen wir das Objekt ">Emitter"< in der mittleren Liste aus
+und setzen diesmal auch seinen Typ auf ">Emitter"<. Anschließend ein
+Klick auf ">Set To Selection"<. Nun werden weitere Optionen sichtbar,
+von denen ich im Moment nur eine ansprechen will, den ">Normal factor"<.
+Dieser gibt die Anfangsgeschwindigkeit in Richtung der oben besprochenen
+Normalen an.  Wenn wir also wollen, dass unser Wasser nicht einfach
+geradewegs nach unten fließt, sondern zu Beginn in Richtung der Normalen
+strömt (bevor die Gravitation zuschlägt), dann sollten wir diesen Faktor
+etwa auf ">5"< setzen.
+
+Um die Szene vor dem Baking jetzt noch ein wenig interessanter zu
+gestalten, erstellen wir kurz unterhalb des Emitters noch eine Kugel als
+Hindernis. Damit wir diese auch in der \fluidsim nutzen können, müssen
+wir sie vorher in ein \TriMesh umwandeln, da das Plugin nicht mit
+\aoi-Primitiven zurechtkommt. Anschließend definieren wir dieses Objekt
+in der Simulation wie im letzten Abschnitt als ">Boundary"<. Jetzt
+können wir wie gehabt das Baking starten, hierfür sollte es genügen, nur
+die ersten 3 Sekunden zu simulieren.
+
+Abbildung~\ref{fig:emitter-def} zeigt noch einmal das Setup des Emitters
+und Abbildung~\ref{fig:render-emitter1} die fertig gerenderte Szene.
+
+\fpic{gfx/shots/Emitter-Definitionen.png}{fig:emitter-def}
+{Beispielhaftes Emitter-Setup zusammen mit einer Kugel als Hindernis.
+Die Kugel wurde vorher in ein \TriMesh umgewandelt.}
+
+\fpic{gfx/renders/Emitter1.png}{fig:render-emitter1}
+{Die gerenderte Szene mit dem Setup aus
+Abbildung~\ref{fig:emitter-def}.}
 %}}}
 
 \subsection{Erweiterte Optionen zum vorigen Beispiel}
 %{{{
-TODO: Normal Factor, ... 
+TODO: Velocity Factor, Density, ... 
 %}}}
 
 %}}}
@@ -557,9 +595,15 @@ IsoSurfaces bei selbigem auszuschalten
 
 \subsection{Animation}
 %{{{
-TODO:
+TODO: Kurzer Abriss, Parameter, Geschwindigkeiten nicht zu hoch, ...
 %}}}
 
+%}}}
+
+\section{Referenzen}
+%{{{
+TODO: Kurze Übersichten der Schritte, um XYZ zu erledigen -- ohne
+Erklärungen.
 %}}}
 
 
