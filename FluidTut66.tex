@@ -137,8 +137,8 @@ findet sich hier ein erstklassiges Online-Wörterbuch:
 als \fachb{Fluid} vordefinieren, um auf einen Schlag viel Flüssigkeit in die
 Szene zu bringen.
 
-Mittlerweile beherrscht das Plugin jedoch auch die Simulation von
-sogenannten \fachb{Soft Bodies}. Damit sind Körper gemeint, die im
+Mittlerweile beherrscht das Plugin jedoch auch die Simulation
+sogenannter \fachb{Soft Bodies}. Damit sind Körper gemeint, die im
 Wesentlichen deformierbar sind, also zum Beispiel Gummibälle oder
 Textilien. Man kann damit in gewissem Rahmen zwar auch feste Körper
 simulieren, stößt aber bald an die Grenzen. Die Gründe dafür werden
@@ -190,12 +190,13 @@ In der Einleitung fiel bereits das entscheidende Stichwort: Animation.
 Die \fluidsim beschreibt Vorgänge, die sich zusammen mit der Zeit
 verändern. Man kommt also nicht umhin, eine Animation zu erstellen --
 auch, wenn man am Ende nur ein einzelnes Bild rendern möchte. Das wäre
-zwar keine allzu schwere Arbeit (Animation ist eine der Hauptaufgaben
-von \aoi), aber die \fluidsim nimmt sie uns großteils sogar ab. Das
-Minimum ist jedoch, sich die \emph{Zeitleiste} zugänglich zu machen. Im
-Normalfall muss man dazu nichts weiter tun, als den Rand am unteren Ende
-des \aoi-Hauptfensters mit der Maus ein Stück nach oben zu ziehen. Mit
-dieser Leiste ist es möglich, innerhalb einer Animation zu navigieren.
+zwar nicht allzu viel Arbeit (Animation ist schließlich eine der
+Hauptaufgaben von \aoi), aber die \fluidsim nimmt sie uns großteils
+sogar ab. Das Minimum ist jedoch, sich die \emph{Zeitleiste} zugänglich
+zu machen. Im Normalfall muss man dazu nichts weiter tun, als den Rand
+am unteren Ende des \aoi-Hauptfensters mit der Maus ein Stück nach oben
+zu ziehen. Mit dieser Leiste ist es möglich, innerhalb einer Animation
+zu navigieren.
 
 \fpic{gfx/shots/TimeScore.png}{fig:timescore}
 {\aoi mit sichtbarer Zeitleiste. An der orange markierten Stelle muss
@@ -332,14 +333,14 @@ Ein Doppelklick auf das neu erstellte Objekt in der Objektliste öffnet
 seine Eigenschaften. Hier wird sich nun die ganze Magie abspielen.
 
 Wir markieren das Objekt ">Becken"< in der mittleren
-Liste.\rand{Boundary} Um einem
-Objekt Eigenschaften zuzuweisen, müssen wir es erst in die aktuelle
-">Auswahl"< übernehmen. Die Begrifflichkeiten kollidieren hier leider
-etwas, denn diese Auswahl hat nichts mit den Selection Sets zu tun -- zu
-denen kommen wir erst später. Die Auswahl, um die es hier geht, bestimmt
-nur jene Objekte, auf die die gesetzten Parameter wirken. Man könnte in
-der mittleren Liste also auch mehrere Objekte auf einmal markieren und
-diese damit gleichzeitig bearbeiten.
+Liste.\rand{Boundary} Um einem Objekt Eigenschaften zuzuweisen, müssen
+wir es erst in die aktuelle ">Auswahl"< übernehmen. Die
+Begrifflichkeiten kollidieren hier leider etwas, denn diese Auswahl hat
+nichts mit den \fachb{Selection Sets} in der linken Hälfte des Dialogs
+zu tun -- zu denen kommen wir erst später. Die Auswahl, um die es hier
+geht, bestimmt nur jene Objekte, auf die die gesetzten Parameter wirken.
+Man könnte in der mittleren Liste also auch mehrere Objekte auf einmal
+markieren und diese damit gleichzeitig bearbeiten.
 
 Aus der rechten Dropdown-Liste wählen wir nun ">Boundry"<\footnote{Die
 Rechtschreibfehler stehen weiter unten auf der ">TODO"<-Liste...} und
@@ -366,7 +367,7 @@ betätigen:
 	\item ">\textbf{Clear Object Cache}"<: Dieser Knopf signalisiert dem
 	Plugin, dass es bitte alle zwischengespeicherten Informationen über
 	die vorhandenen Objekte vergessen möge, vorallem deren Geometrie.
-	Das heißt, diesen Knopf muss man auch betätigen, wenn man im
+	Das heißt, diesen Knopf müsste man auch betätigen, wenn man im
 	Nachhinein die Größe des Beckens ändern wollte.
 
 	\item ">\textbf{Reset Simulation}"<: Dagegen sorgt dieser zweite
@@ -383,11 +384,11 @@ er bestimmt \emph{nicht die Dauer} der Simulation. Wir schreiben also
 eine ">2"< in das Feld, da wir von Sekunde 0 bis Sekunde 2 simulieren
 wollen.
 
-Nach einem Klick auf ">Bake"< erscheint kurz ein Fortschrittsbalken, der
-aber kurz darauf wieder verschwindet. Verlässt man nun das Plugin mit
-einem Klick auf ">OK"< und bewegt danach den Schieber in der Zeitleiste
-etwas, sollte man auch schon die ersten Anzeichen von Leben in der
-Flüssigkeit entdecken können.
+Nach einem Klick auf ">Bake"< erscheint ein Fortschrittsbalken, der aber
+bald wieder verschwindet. Verlässt man nun das Plugin mit einem Klick
+auf ">OK"< und bewegt danach den Schieber in der Zeitleiste etwas,
+sollte man auch schon die ersten Anzeichen von Leben in der Flüssigkeit
+entdecken können.
 
 Bevor man ein halbwegs sinnvolles Bild rendern kann, heißt es jedoch:
 
