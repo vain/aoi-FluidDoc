@@ -5,7 +5,7 @@
 
 
 # What's our file?
-BASE=FluidTut66
+BASE=FluidDoc66
 
 # Image patterns
 PATS=('\\fpic{\([^}]*pdf\)}' '\\includegraphics[^{]*{\([^}]*pdf\)}')
