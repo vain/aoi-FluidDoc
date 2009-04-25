@@ -171,10 +171,7 @@ Zusammen mit \aoi's Fähigkeiten zur Animation bieten sich nahezu
 unendliche Möglichkeiten, da hier auch Prozeduren und Skripte genutzt
 werden können.
 
-Ein bisschen Zukunftsmusik ist in diesen Beispielen allerdings noch
-enthalten: Im Moment beherrscht das Plugin noch keine Reibung.
-
-Nichtsdestotrotz: Viel Spaß!
+In diesem Sinne: Viel Spaß!
 %}}}
 
 %}}}
@@ -425,7 +422,134 @@ Ergebnis aussehen kann.
 
 \subsection{Erweiterte Optionen zum vorigen Beispiel}
 %{{{
-TODO: Was es sonst noch so die bis jetzt besprochenen Objekte betreffend gibt.
+\subsubsection{\fachb{Fluid}}
+%{{{
+Ein Objekt, das wie in Abbildung~\ref{fig:becken-def} als ">Fluid"<
+definiert ist, bietet zusätzlich folgende Optionen:
+
+\itA
+	\item ">\textbf{Fill ratio}"< in den Richtungen $X$, $Y$ und $Z$:
+	Hiermit kann angegeben, wie ">voll"< ein Objekt ist. Hat man
+	beispielsweise einen hohen Zylinder zum Fluid-Objekt deklariert und
+	möchte diesen aber nur zur Hälfte mit Wasser gefüllt haben, dann
+	muss ">X fill ratio"< auf ">0.5"< gesetzt werden. Der Wertebereich
+	geht hier von ">0"< bis ">1"<.
+
+	\item ">\textbf{Initial v}"< steht für ">initial velocity"<,
+	bestimmt also die Anfangsgeschwindigkeit, und auch hier gibt es
+	wieder separate Werte für die Richtungen $X$, $Y$ und $Z$. Möchte
+	man also, dass der Wasserblock zu Beginn erst eine Sekunde nach oben
+	fliegt und dann wieder herunterfällt, so muss man ">Initial vy"< auf
+	">9.81"< setzen. Der Wertebereich ist beliebig, es können also auch
+	negative Zahlen eingegeben werden.
+
+	\item ">\textbf{Dither ratio}"<: Hiermit ist es möglich, die
+	Flüssigkeit am Anfang etwas durcheinanderzuwirbeln -- aber ohne
+	Anfangsgeschwindigkeiten zu setzen. Auch hier ist der Wertebereich
+	quasi beliebig, man muss aber bedenken, dass Partikel niemals
+	außerhalb des Fluid-Objektes platziert werden. Setzt man ">dither
+	ratio"< also zum Beispiel auf ">1000"<, dann wird vermutlich gar
+	keine Flüssigkeit mehr erscheinen. Im Bereich ">1 bis 5"< fährt man
+	aber ganz gut.
+
+\itE
+%}}}
+
+\subsubsection{\fachb{Boundary}}
+%{{{
+\fachb{Boundaries} sind etwas komplexere Objekte. Gehen wir der Reihe
+nach durch:
+
+\itA
+	\item ">\textbf{Is static}"<: Von dieser Eigenschaft werden wir
+	später im Animationskapitel noch Gebrauch machen. Sie bestimmt, ob
+	sich dieses Objekt bewegt oder nicht.
+
+	\item ">\textbf{Is PolyBoundary}"<: Bestimmt, ob die Flächen des
+	Körpers als Grenzen angesehen werden sollen oder ob die alte
+	vertexbasierte Methode angewandt werden soll. In der Regel will man
+	diesen Haken nicht entfernen und schätzungsweise wird diese Option
+	auch bald verschwinden.
+
+	\item ">\textbf{Calculate boundary outside poly(gon)}"<: Da jedes
+	Hindernis ein Mesh ist, besteht es zwangsläufig aus einer Menge von
+	Polygonen, bei einem \TriMesh sind das lauter Dreiecke. Ein Schritt
+	zur Erkennung, ob ein Partikel mit einem Hindernis kollidiert oder
+	ihm nahe ist, ist, dieses Partikel in die Ebene zu projizieren, die
+	von einem solchen Dreieck aufgespannt wird. Danach wird geprüft, ob
+	diese Projektion innerhalb des Dreiecks liegt oder nicht. Somit
+	kann, ganz grob umrissen, ein Kollisionstest eines Partikels mit
+	einem Dreieck durchgeführt werden. Abbildung~\ref{fig:projektion}
+	soll diese Idee noch einmal illustrieren.
+
+	\fpic{gfx/skizzen/projektion.pdf}{fig:projektion}
+	{Die Projektionen zweier Kugeln in die Ebene eines Dreiecks. Die
+	Projektion der orangenen Kugel liegt nun innerhalb dieses Dreiecks,
+	aber die der grünen Kugel nicht -- sie würde also niemals mit dem
+	Dreieck kollidieren können, auch wenn sie nicht so hoch über ihm
+	stehen würde.}
+
+	Bei manchen Körpern kann bei dieser Methode das Problem auftreten,
+	dass Flüssigkeit ">ausläuft"<, das Hindernis also nicht ganz dicht
+	ist. Die hier angesprochene Option versucht, dieses Problem zu
+	entschärfen. Sie sorgt dafür, dass die Kraft, die auf ein Partikel
+	wirkt, wenn seine Projektion in die Ebene außerhalb des Dreiecks
+	ist, nicht abrupt Null wird. Stattdessen wirkt auch außerhalb eine
+	geringe Kraft auf das Partikel, sofern es in der Nähe ist.
+
+	Diese Lösung ist allerdings nicht perfekt. Außerdem sorgt sie dafür,
+	dass häufig ein zu großer Abstand zwischen Hindernis und Flüssigkeit
+	herrscht -- was natürlich nicht realistisch ist. Die Option ist
+	daher auch standardmäßig deaktiviert. Hat man ein ">Leck"<, kann es
+	sich aber unter Umständen lohnen, sie testweise zu aktivieren.
+
+	\item ">\textbf{Velocity Bias}"<: Ein alternatives Gegenmittel gegen
+	dasselbe Problem (leckende Körper). Hierbei wird aktiv Energie in
+	das System gebracht, indem das Hindernis Partikel in der Nähe leicht
+	abstößt. Dies sollte nur benutzt werden, wenn ">Calculate boundary
+	outside poly"< \emph{deaktiviert} ist.
+
+	Damit wird natürlich der Energieerhaltungssatz verletzt. Das führt
+	dazu, dass Flüssigkeiten anfangen zu ">kochen"<. Will man also ein
+	Leck stopfen, kann diese Option nur mit einem sehr geringen Wert
+	eventuell eine Lösung sein. Andererseits kann es aber natürlich auch
+	sein, dass man gerade den Effekt des Kochens erzeugen möchte. :-)
+
+	Zu hoch sollte dieser Wert aber nicht sein. Bereits bei ">2"< kann
+	es schnell passieren, dass sich die Simulation zu sehr aufschaukelt
+	und ">explodiert"<.
+
+	\item ">\textbf{Boundary Factor}"<: Dieser Faktor nimmt Einfluss auf
+	das Abprallverhalten von Partikeln und liefert damit in gewissem
+	Rahmen eine weitere Alternative, um Lecks entgegenzuwirken. Anders
+	als der ">Velocity Bias"< wird hier aber nicht konstant Energie in
+	das System gebracht, sondern nur im Kontaktmoment.
+
+	Je höher dieser Faktor ist, desto stärker prallen Partikel von der
+	Oberfläche ab. Aber Vorsicht: Ist der Faktor zu hoch, kann auch
+	hiermit die Simulation zur Explosion gebracht werden.
+
+	\item ">\textbf{Boundary Clamp}"< steht in direktem Zusammenhang mit
+	dem eben erwähnten ">Boundary Factor"<, er setzt nämlich ein Maximum
+	für diesen Faktor. Das heißt, man kann verhindern, dass ein schnell
+	auftreffendes Teilchen eine exorbitant hohe Reflexionskraft erfährt.
+	Will man dagegen ermöglichen, dass Partikel stark abprallen, so muss
+	dieser Wert recht hoch angesetzt werden (im Zweifelsfalle auf
+	">1000"< oder mehr).
+
+	\item ">\textbf{Boundary Friction}"<: Dieser Wert tut genau das,
+	was sein Name vermuten lässt -- er steuert die Reibung, die auf
+	dieser Oberfläche wirkt. Hierbei gibt es nicht allzu viel zu
+	beachten. Je höher dieser Wert, desto größer ist die Reibung. Man
+	muss allerdings selbst etwas experimentieren, wenn man gezielt
+	bestimmte Materialien simulieren will.
+
+	TODO: Was genau steuert boundary friction und wie sieht die formel
+	dazu aus?
+
+\itE
+%}}}
+
 %}}}
 
 \subsection{Gezielt Flüssigkeit dazugießen (\fachb{Emitters})}
