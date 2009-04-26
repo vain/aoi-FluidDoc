@@ -468,8 +468,8 @@ nach durch:
 	\item ">\textbf{Is PolyBoundary}"<: Bestimmt, ob die Flächen des
 	Körpers als Grenzen angesehen werden sollen oder ob die alte
 	vertexbasierte Methode angewandt werden soll. In der Regel will man
-	diesen Haken nicht entfernen und schätzungsweise wird diese Option
-	auch bald verschwinden.
+	diesen Haken nicht entfernen und schätzungsweise wird diese
+	veraltete Option auch bald verschwinden.
 
 	\item ">\textbf{Calculate boundary outside poly(gon)}"<: Da jedes
 	Hindernis ein Mesh ist, besteht es zwangsläufig aus einer Menge von
@@ -495,7 +495,16 @@ nach durch:
 	entschärfen. Sie sorgt dafür, dass die Kraft, die auf ein Partikel
 	wirkt, wenn seine Projektion in die Ebene außerhalb des Dreiecks
 	ist, nicht abrupt Null wird. Stattdessen wirkt auch außerhalb eine
-	geringe Kraft auf das Partikel, sofern es in der Nähe ist.
+	geringe Kraft auf das Partikel, sofern es in der Nähe ist. Hierfür
+	wird der Abstand zum nächstliegenden Punkt im fraglichen Polygon als
+	Maß genommen, wie Abbildung~\ref{fig:projektion2} verdeutlichen
+	soll.
+
+	\fpic{gfx/skizzen/projektion2.pdf}{fig:projektion2}
+	{Auch Partikel, deren Projektion außerhalb eines Polygons liegt,
+	erfahren anhand des Abstands zum nächstliegenden Punkt auf dem
+	Polygon eine entsprechende Abstoßung, wenn ">Calculate boundary
+	outside poly"< aktiviert ist.}
 
 	Diese Lösung ist allerdings nicht perfekt. Außerdem sorgt sie dafür,
 	dass häufig ein zu großer Abstand zwischen Hindernis und Flüssigkeit
@@ -505,8 +514,9 @@ nach durch:
 
 	\item ">\textbf{Velocity Bias}"<: Ein alternatives Gegenmittel gegen
 	dasselbe Problem (leckende Körper). Hierbei wird aktiv Energie in
-	das System gebracht, indem das Hindernis Partikel in der Nähe leicht
-	abstößt. Dies sollte nur benutzt werden, wenn ">Calculate boundary
+	das System gebracht und Partikel in der Nähe stärker abgestoßen. Der
+	eingegebene Wert regelt dabei die Stärke dieser zusätzlichen
+	Abstoßung. Dies sollte nur benutzt werden, wenn ">Calculate boundary
 	outside poly"< \emph{deaktiviert} ist.
 
 	Damit wird natürlich der Energieerhaltungssatz verletzt. Das führt
@@ -533,19 +543,18 @@ nach durch:
 	dem eben erwähnten ">Boundary Factor"<, er setzt nämlich ein Maximum
 	für diesen Faktor. Das heißt, man kann verhindern, dass ein schnell
 	auftreffendes Teilchen eine exorbitant hohe Reflexionskraft erfährt.
-	Will man dagegen ermöglichen, dass Partikel stark abprallen, so muss
-	dieser Wert recht hoch angesetzt werden (im Zweifelsfalle auf
-	">1000"< oder mehr).
+	Will man dagegen ermöglichen, dass Partikel tatsächlich sehr stark
+	abprallen, so muss dieser Wert recht hoch angesetzt werden (im
+	Zweifelsfalle auf ">1000"< oder mehr).
 
-	\item ">\textbf{Boundary Friction}"<: Dieser Wert tut genau das,
-	was sein Name vermuten lässt -- er steuert die Reibung, die auf
-	dieser Oberfläche wirkt. Hierbei gibt es nicht allzu viel zu
-	beachten. Je höher dieser Wert, desto größer ist die Reibung. Man
-	muss allerdings selbst etwas experimentieren, wenn man gezielt
-	bestimmte Materialien simulieren will.
-
-	TODO: Was genau steuert boundary friction und wie sieht die formel
-	dazu aus?
+	\item ">\textbf{Boundary Friction}"<: Dieser Wert tut genau das, was
+	sein Name vermuten lässt -- er steuert die Reibung, die auf dieser
+	Oberfläche wirkt. Hierbei gibt es nicht allzu viel zu beachten. Je
+	höher dieser Wert, desto größer ist die Reibung. Man muss allerdings
+	selbst etwas experimentieren, wenn man gezielt bestimmte Materialien
+	simulieren will, denn eine ">echte"< physikalische Bedeutung hat der
+	Wert nicht. Das heißt leider auch, dass es im Moment nicht möglich
+	ist, Referenzwerte von echten Materialien für die Reibung anzugeben.
 
 \itE
 %}}}
