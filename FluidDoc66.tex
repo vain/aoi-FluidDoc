@@ -127,14 +127,14 @@ installiert ist, kann man es sich unter folgender URL herunterladen:
 \subsection{Funktion und Einsatzzweck der Simulation}
 %{{{
 Wie der Name schon vermuten lässt, ist der primäre Zweck, Flüssigkeiten
-zu simulieren. Diese entstehen in sogenannten \fachb{Emitters} und
+zu simulieren. Diese entstehen in einem sogenannten \fachb{Emitter} und
 interagieren dann mit als \fachb{Boundary} definierten Objekten in der
 Szene.\footnote{Dem Plugin fehlt noch eine deutsche Übersetzung, daher
 werde ich mich hier an die englischen Begriffe halten, um Verwirrung zu
 vermeiden. Sollte der eine oder andere Begriff Probleme bereiten, dann
 findet sich hier ein erstklassiges Online-Wörterbuch:
-\url{http://dict.leo.org}} Alternativ kann man auch ganze Objekte
-als \fachb{Fluid} vordefinieren, um auf einen Schlag viel Flüssigkeit in die
+\url{http://dict.leo.org}} Alternativ kann man auch ganze Objekte als
+\fachb{Fluid} vordefinieren, um auf einen Schlag viel Flüssigkeit in die
 Szene zu bringen.
 
 Mittlerweile beherrscht das Plugin jedoch auch die Simulation
@@ -561,14 +561,14 @@ nach durch:
 
 %}}}
 
-\subsection{Gezielt Flüssigkeit dazugießen (\fachb{Emitters})}
+\subsection{Gezielt Flüssigkeit dazugießen (\fachb{Emitter})}
 %{{{
-\fachb{Emitters} sind wie Fluids eine Möglichkeit, um Flüssigkeit
-entstehen zu lassen. Anders als letztere können Emitters aber eher als
-">Wasserhahn"< angesehen werden: Aus ihnen strömt Flüssigkeit mit einer
-festen Geschwindigkeit in eine bestimmte Richtung.
+Ein \fachb{Emitter} ist wie ein Fluid eine Möglichkeit, um Flüssigkeit
+entstehen zu lassen. Ein Emitter kann aber eher als ">Wasserhahn"<
+angesehen werden: Aus ihnen strömt Flüssigkeit mit einer festen
+Geschwindigkeit in eine bestimmte Richtung.
 
-Es ist nun so, dass Emitters noch ältere Programmteile sind und daher
+Es ist nun so, dass Emitter noch ältere Programmteile sind und daher
 vertexbasiert arbeiten.\rand{Normalen} Für uns bedeutet das in erster
 Linie, dass wir ein bisschen mehr Arbeit haben und zuerst einen ganz
 kurzen Ausflug in die Geometrie machen müssen. Denn vorab muss geklärt
@@ -589,7 +589,7 @@ mehr all seine Eckpunkt in einer Ebene liegen -- damit ist keine
 eindeutige Flächennormale definierbar.
 
 Wir werden gleich den ersten Emitter erstellen, welcher ein einfaches
-\TriMesh sein wird. Wie bereits erwähnt, arbeiten Emitters vertexbasiert.
+\TriMesh sein wird. Wie bereits erwähnt, arbeiten Emitter vertexbasiert.
 Das heißt, dass jeder Punkt in unserem \TriMesh Flüssigkeit erzeugen
 wird. Doch in welche Richtung? Hier kommen jetzt die Normalen ins Spiel.
 Normalen sind zwar eigentlich auf Flächen definiert, lassen sich aber
@@ -667,19 +667,19 @@ Abbildung~\ref{fig:emitter-def}.}
 
 \subsection{Erweiterte Optionen zum vorigen Beispiel}
 %{{{
-\subsubsection{\fachb{Emitters}}
+\subsubsection{\fachb{Emitter}}
 %{{{
-Die erweiterten Optionen für Emitters sind recht überschaubar und
+Die erweiterten Optionen für Emitter sind recht überschaubar und
 erklären sich auch beinahe von selbst:
 
 \itA
-	\item ">\textbf{Negative Emitter}"<: Normale Emitters senden
+	\item ">\textbf{Negative Emitter}"<: Normale Emitter senden
 	Flüssigkeit aus. Möchte man aber gezielt Flüssigkeiten aus der
 	Simulation wieder entfernen, so muss man diesen Haken setzen.
 	Partikel, die einem negativen Emitter nahe sind, werden schlichtweg
 	gelöscht.
 
-	Nicht vergessen: Emitters arbeiten immer vertexbasiert -- so auch
+	Nicht vergessen: Emitter arbeiten immer vertexbasiert -- so auch
 	die negativen ihrer Gattung. Will man also hiermit großflächig
 	Teilchen löschen, dann muss das Mesh des negativen Emitters sehr
 	fein unterteilt sein.
@@ -689,7 +689,7 @@ erklären sich auch beinahe von selbst:
 	Normalen.
 
 	\item Der ">\textbf{Velocity Factor}"< betrifft nur animierte
-	Emitters, genauer gesagt, er betrifft nur bewegte. Die Simulation
+	Emitter, genauer gesagt, er betrifft nur bewegte. Die Simulation
 	erstellt im Normalfall einfach an den gegenwärtigen Vertexpositionen
 	neue Teilchen. Bewegt sich ein Emitter aber, dann ist das nicht
 	unbedingt physikalisch korrekt -- wer von einem fahrenden Zug
