@@ -667,7 +667,54 @@ Abbildung~\ref{fig:emitter-def}.}
 
 \subsection{Erweiterte Optionen zum vorigen Beispiel}
 %{{{
-TODO: Velocity Factor, Density, ... 
+\subsubsection{\fachb{Emitters}}
+%{{{
+Die erweiterten Optionen für Emitters sind recht überschaubar und
+erklären sich auch beinahe von selbst:
+
+\itA
+	\item ">\textbf{Negative Emitter}"<: Normale Emitters senden
+	Flüssigkeit aus. Möchte man aber gezielt Flüssigkeiten aus der
+	Simulation wieder entfernen, so muss man diesen Haken setzen.
+	Partikel, die einem negativen Emitter nahe sind, werden schlichtweg
+	gelöscht.
+
+	Nicht vergessen: Emitters arbeiten immer vertexbasiert -- so auch
+	die negativen ihrer Gattung. Will man also hiermit großflächig
+	Teilchen löschen, dann muss das Mesh des negativen Emitters sehr
+	fein unterteilt sein.
+
+	\item ">\textbf{Normal Factor}"<: Auf diesen Wert wurde weiter oben
+	bereits näher eingegangen. Er regelt die Geschwindigkeit entlang der
+	Normalen.
+
+	\item Der ">\textbf{Velocity Factor}"< betrifft nur animierte
+	Emitters, genauer gesagt, er betrifft nur bewegte. Die Simulation
+	erstellt im Normalfall einfach an den gegenwärtigen Vertexpositionen
+	neue Teilchen. Bewegt sich ein Emitter aber, dann ist das nicht
+	unbedingt physikalisch korrekt -- wer von einem fahrenden Zug
+	abspringt, hat auch nicht sofort eine Geschwindigkeit von ">0"<,
+	bloß weil er den Zug verlassen hat.
+
+	Setzt man den Faktor also auf ">2"<, so erhalten die Partikel die
+	doppelte Geschwindigkeit des Emitters als Anfangsgeschwindigkeit. In
+	der Regel dürfte hier ein Wert von ">1"< gewünscht sein, denn die
+	reguläre Anfangsgeschwindigkeit sollte über den ">Normal Factor"<
+	gesteuert werden.
+
+	\item ">\textbf{Is static}"< ist wie bei Boundaries nötig, wenn eine
+	Animation erstellt werden soll. Ist dieser Haken nicht gesetzt,
+	bekommt die \fluidsim nicht mit, dass sich der Emitter bewegt.
+
+	\item ">\textbf{Density Factor}"<: Eine recht selbsterklärende
+	Option. Hiermit kann gesteuert werden, wieviel Flüssigkeit aus dem
+	Emitter austritt. Je kleiner der Wert (es sind allerdings nur
+	positive Werte größer Null erlaubt), desto dünnflüssiger ist der
+	Partikelstrom. Es tröpfelt.
+
+\itE
+%}}}
+
 %}}}
 
 %}}}
@@ -677,6 +724,24 @@ TODO: Velocity Factor, Density, ...
 \section{Simulation deformierbarer Körper}
 %{{{
 TODO: Benutzung, Feder-Masse-System und so
+%}}}
+
+
+\pagebreak
+\section{Globale Optionen}
+%{{{
+
+\subsection{\fachb{Previews and Views}}
+%{{{
+TODO: Grid für den Raytracer und Möglichkeit, IsoSurfaces bei selbigem
+auszuschalten
+%}}}
+
+\subsection{\fachb{Fluid Params}}
+%{{{
+TODO
+%}}}
+
 %}}}
 
 
@@ -720,10 +785,9 @@ man sie vorab zu einem Selection Set zusammen.
 TODO: Explizites Beispiel
 %}}}
 
-\subsection{Texturieren und Rendern}
+\subsection{Texturieren, Materialien und Rendern}
 %{{{
-TODO: Raster-Renderer empfehlen, Grid für den Raytracer und Möglichkeit,
-IsoSurfaces bei selbigem auszuschalten
+TODO: Tex/Mat klar, Raster-Renderer empfehlen
 %}}}
 
 \subsection{Animation}
