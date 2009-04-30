@@ -723,6 +723,40 @@ erklären sich auch beinahe von selbst:
 \pagebreak
 \section{Simulation deformierbarer Körper}
 %{{{
+
+\subsection{Hintergrund}
+%{{{
+\fachb{Soft Bodies} werden als sogenannte Feder-Masse-Systeme
+modelliert. Das heißt, es gibt mehrere Massepunkte, die durch Federn
+verbunden sind. In gewissem Rahmen und mit einer geeigneten Geometrie
+können damit weiche, wabernde Körper simuliert werden.
+
+Abbildung~\ref{fig:2dsim} eine einfache, zweidimensionale Version eines
+Feder-Masse-Systems: Die grünen Punkte sind bewegliche Massepunkte, der
+rote Punkt in der Mitte ist fixiert und die Verbindungen zwischen den
+Punkten stellen die eingesetzten Federn dar.
+
+Es gibt zwei dominierende Faktoren, die eine solche Simulation
+beeinflussen: Die Federkonstante (\fachb{Spring Constant}) und die Masse
+eines Partikels (\fachb{Particle Mass}). In Abbildung~\ref{fig:2dsim}
+sind gleich mehrere Simulationen dargestellt, wobei die Federkonstante
+variiert. Eine kleinere Konstante sorgt dafür, dass das Objekt
+">weicher"< ist -- wird diese Konstante aber zu klein gewählt, dann
+bricht das Objekt einfach in sich zusammen.
+
+\fpic{gfx/shots/PSim-montage.png}{fig:2dsim}
+{Zweidimensionale Simulation eines Feder-Masse-Systems mit verschiedenen
+Federkonstanten (absteigend von links oben nach rechts unten). Ist diese
+zu niedrig, bricht das System zusammen. Wäre sie zu hoch, würde es aber
+durch numerische Instabilität ">explodieren"<.}
+
+Deklariert man in \aoi ein Objekt als Soft Body, dann werden alle
+Punkte des \TriMesh's zu Massepunkten und die Kanten dazwischen zu
+Federn. Dabei findet eine gleichmäßige Verteilung statt, also wird allen
+Federn dieselbe Konstante und allen Massepunkten dieselbe Masse
+zugewiesen.
+%}}}
+
 TODO: Benutzung, Feder-Masse-System und so
 %}}}
 
@@ -926,7 +960,8 @@ TODO: Explizites Beispiel
 
 \subsection{Texturieren, Materialien und Rendern}
 %{{{
-TODO: Tex/Mat klar, Raster-Renderer empfehlen
+TODO: Tex/Mat klar, Raster-Renderer empfehlen -- vielleicht nach Globale
+Optionen verschieben? So viel kommt hier nicht mehr zusammen
 %}}}
 
 \subsection{Animation}
