@@ -841,7 +841,44 @@ Aber der Reihe nach:
 
 \subsection{\fachb{Fluid Params}}
 %{{{
-TODO
+\itA
+	\item ">\textbf{Step Size}"<: Bestimmt den zeitlichen Abstand zweier
+	Simulationsschritte. Hierauf wurde bereits in den Grundlagen genauer
+	eingegangen.
+
+	\item ">\textbf{Frame Bake Size}"<: Hiermit können Frames
+	zusammengefasst werden, während die darunterliegende Simulation mit
+	derselben Schrittweite berechnet wird. Ein Wert von ">1.0"< bewirkt
+	beispielsweise, dass nur noch jede Sekunde ein neuer
+	Simulationsschritt sichtbar wird.
+
+	Will man die zeitliche Auflösung erhöhen, also mit mehr Bildern pro
+	Sekunde rendern, so muss gegebenenfalls dieser Wert geändert
+	werden. Er lässt sich berechnen als
+	\aleq
+	{
+		size &= \frac{1}{fps} \qq ,
+	}
+	wobei mit $fps$ die gewünschten Bilder pro Sekunde bezeichnet
+	werden. Für 200 Bilder pro Sekunde muss dieser Wert also auf $0.005$
+	gesetzt werden. Ansonsten wird die Animation ruckeln.
+	Selbstverständlich muss eventuell auch die Step Size an sich
+	verringert werden.
+
+	\item ">\textbf{Particle Size}"<: Die Größe eines Partikels. Wurde
+	auch bei den Grundlagen behandelt.
+
+	\item ">\textbf{Density}"<: Die Dichte oder Kohärenz der
+	Flüssigkeit. Wird dieser Wert verringert, so neigt die Simulation
+	dazu, einzelne ">Kleckse"< zu produzieren, während sie bei großen
+	Werten eher ein zusammengehöriges Gebilde formt.
+
+	\item ">\textbf{Body Acceleration}"<: Hiermit ist schlichtweg die
+	Gravitation gemeint. Daher ist die mittlere Erdbeschleunigung in
+	negativer $Y$-Richtung auch der Standard.
+
+\itE
+
 %}}}
 
 %}}}
