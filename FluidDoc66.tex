@@ -733,8 +733,110 @@ TODO: Benutzung, Feder-Masse-System und so
 
 \subsection{\fachb{Previews and Views}}
 %{{{
-TODO: Grid für den Raytracer und Möglichkeit, IsoSurfaces bei selbigem
-auszuschalten
+Wir gehen kurz die vorhanden Optionen in diesem Tab durch. Es sei darauf
+hingewiesen, dass Vidiot eine schöne Übersicht der Ergebnisse bezüglich
+der verschiedenen Iso-Surface-Parameter erstellt hat:
+
+\url{http://www.aoi-board.de/index.php?action=redirect&loc=show_post&id=1731}
+
+Aber der Reihe nach:
+
+\itA
+	\item ">\textbf{Preview Particles}"<: Soll überhaupt eine Vorschau
+	von Partikeln erstellt werden?
+
+	\item ">\textbf{Preview Boundary}"<: Diese Option scheint keinen
+	Effekt mehr zu haben.
+
+	\item ">\textbf{Use IsoSurfaces for Raytracing}"<: Iso-Surfaces
+	(manchmal auch implizite Flächen, Blobs oder Metaballs genannt --
+	auch, wenn nicht alle exakt dasselbe meinen) sind eine grundlegend
+	andere Art, um Oberflächen zu beschreiben. Anders als triangulierte
+	Meshes, die nur aus Dreiecken bestehen und daher den gewünschten
+	Körper oft nur \emph{annähern} können, bieten Iso-Surfaces eine viel
+	kompaktere Form der Speicherung und Beschreibung von Objekten. Die
+	einfachste Iso-Fläche ist die Kugel:
+
+	\begin{quote}
+		"`Alle Punkte im Raum, die den Abstand $5$ vom Mittelpunkt
+		besitzen, gehören zur Fläche."'
+	\end{quote}
+
+	Damit ist eine Kugeloberfläche mit Radius $5$ mathematisch exakt
+	beschrieben -- ein Dreiecksnetz müsste dagegen unendlich viele
+	Dreiecke aufweisen, um diese Genauigkeit zu erreichen.
+
+	Natürlich gibt es wie immer Nachteile, denn zum einen benötigt das
+	Rendern von Iso-Surfaces mehr Zeit und zum anderen eignen sie sich
+	eher schlecht zum allgemeinen Modellieren. Dafür aber umso besser
+	zum Rendern von Flüssigkeiten, denn ">triangulierte Flüssigkeiten"<
+	würden zwangsläufig ziemlich kantig aussehen. Als Iso-Surfaces
+	erscheinen sie dagegen völlig ">smooth"<, da hierfür viele kleine
+	Kugeln verwendet werden, die sanft ineinander überfließen.
+
+	Diese Option zu \emph{de}aktivieren, kann aber auch gewünscht sein:
+	Dann nämlich rendert \aoi's Raytracer nur noch die
+	pyramidenförmigen, spitzen Partikel, wie man sie auch in der
+	Vorschau sieht. Das ist natürlich erheblich schneller. Es ist auch
+	dringend empfehlenswert, diese Option zu \emph{de}aktivieren, wenn
+	man ausschließlich Soft Bodies rendert.
+
+	\item ">\textbf{Metaball size ratio}"<: Werden Iso-Surfaces genutzt,
+	regelt diese Option die ">Größe"< der Kugeln. Das ist jedoch nicht
+	mit der eigentlichen Particle Size zu verwechseln. Hierbei handelt
+	es sich nur um einen reinen Darstellungsparameter -- wird die
+	Metaball Size als verkleinert, werden die einzelnen
+	Flüssigkeitspartikel zwar kleiner gerendert, aber immernoch so
+	berechnet wie vorher. Das Resultat ist unrealistisch.
+
+	\item ">\textbf{Implicit Surface Threshold}"<: Iso-Surfaces werden
+	nicht wie gewöhnlich mit direkten Schnitttests (">Schneidet der
+	aktuelle Ray ein Dreieck? Wenn ja, wo und wie?"<) gerendert, sondern
+	es wird gewöhnlich an einem Ray ">entlanggetastet"<. In der Theorie
+	muss der Abstand zwischen zwei Abstandpunkten unendlich klein sein.
+	In der Praxis geht das natürlich nicht, also legt man eine bestimmte
+	Schrittweite fest, was hiermit getan wird.
+
+	Je größer der Wert ist, desto Schneller ist das Rendern, aber desto
+	ungenauer ist das Ergebnis auch. Ein kleinerer Wert, zum Beispiel
+	">0.5"< braucht mehr Zeit, sieht aber besser aus.
+
+	\item ">\textbf{Mesh Preview}"< und ">\textbf{Mesh Size}"<: Hiermit
+	wird eine Triangulierung der Flüssigkeit vorgenommen und das
+	resultierende \TriMesh direkt -- ohne Rendern -- in der Szene
+	dargestellt. Dieser Prozess ist allerdings äußerst aufwändig und als
+	Vorschau kaum nützlich.
+
+	Die Größe bestimmt die Genauigkeit des Mesh Previews. Je höher der
+	Wert ist, desto ungenauer ist das Ergebnis. Achtung: Kleine Werte
+	können \aoi schnell in die Knie zwingen, sodass man es nur noch
+	abwürgen kann.
+
+	\item ">\textbf{Velocity Factor}"<: Ist Mesh Preview aus (Standard),
+	dann werden kleine Pyramiden angezeigt, welche die aktuelle Richtung
+	und (in Form ihrer Höhe) Geschwindigkeit eines jeden Partikels
+	symbolisieren. Der Velocity Factor regelt nun, wie stark die
+	aktuelle Geschwindigkeit in diese Darstellung einfließt -- größere
+	Werte bedeuten mehr Einfluss. In der Regel will man hier den
+	Standardwert beibehalten.
+
+	\item ">\textbf{Ratio displayed particles}"<: Diese Optionen scheint
+	keinen Effekt mehr zu haben.
+
+	\item ">\textbf{Use Sample Grid}"< und ">\textbf{Sample Grid
+	Factor}"<: Dies ist eine Option zur Beschleunigung des
+	Rendervorgangs, indem der Raum gleichmäßig in ein Gitter unterteilt
+	wird. In diesem Gitter werden Ergebnisse des Raytracings
+	zwischengespeichert, sodass de facto nicht mehr jeder Ray komplett
+	verfolgt wird -- landet er in einem bereits besuchten Gitterknoten,
+	erhält er den dort gespeicherten Wert. Dadurch wird das Bild
+	natürlich wieder ungenauer und es kann auch zu Artefakten kommen.
+
+	Je kleiner der Wert ist, desto ungenauer ist das Ergebnis. Es lohnt
+	sich aber kaum mehr, diese Option zu aktivieren, da das Plugin
+	anderweitig über bessere Optimierungen verfügt.
+
+\itE
 %}}}
 
 \subsection{\fachb{Fluid Params}}
@@ -795,14 +897,6 @@ TODO: Tex/Mat klar, Raster-Renderer empfehlen
 TODO: Kurzer Abriss, Parameter, Geschwindigkeiten nicht zu hoch, ...
 %}}}
 
-%}}}
-
-
-\pagebreak
-\section{Referenzen}
-%{{{
-TODO: Kurze Übersichten der Schritte, um XYZ zu erledigen -- ohne
-Erklärungen oder Screenshots. Zum Nachschlagen.
 %}}}
 
 
