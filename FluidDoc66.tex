@@ -802,10 +802,91 @@ Abbildung~\ref{fig:rampe1-montage} zu sehen.
 \fpic{gfx/renders/Rampe1-montage.png}{fig:rampe1-montage}
 {Die aus Abbildung~\ref{fig:rampe1} entstandene Simulation der zwei
 fallenden Würfel.}
+
+Man sollte bei Soft Bodies ein paar Dinge im Kopf behalten:
+\itA
+	\item Sie sind eigentlich nicht für Objekte wie Würfel gedacht,
+	sondern für wirklich weiche Objekte. Wie man sieht, kann man zwar
+	mit entsprechend großer Federkonstanten auch scheinbar harte Objekte
+	simulieren, diese werden aber immer kollabieren, wenn zu große
+	Kräfte auf sie wirken. Man kann sie zum Beispiel nicht aus
+	beliebiger Höhe fallenlassen.
+
+	\item Viele Objekte sind nicht stabil -- zum Beispiel ein langes
+	Brett. Dieses würde sich eher wie ein Stück Stoff verhalten und
+	lasch in sich zusammenfallen. Der Versuch, ein Katapult zu
+	simulieren, dürfte also wahrscheinlich fehlschlagen.\footnote{Ich
+	würde mich aber sehr über mögliche Lösungen freuen. :-)}
+
+	\item Es gibt noch keine Selbstkollision, ein Soft Body kollidiert
+	also nie mit sich selbst. Einerseits begünstigt das leider den
+	häufigen Kollaps, andererseits sind dadurch auch Stoffe
+	(\fachb{Clothes}) nicht realistisch simulierbar.
+
+	\item Man darf nie vergessen, die Objekte in \TriMesh'es zu
+	konvertieren. :-)
+
+\itE
 %}}}
 
 \subsection{Erweiterte Optionen}
 %{{{
+Auch Soft Bodies besitzen ein paar Einstellungen zusätzlich:
+\itA
+	\item ">\textbf{Spring Constant}"< und ">\textbf{Particle Mass}"<:
+	Das sind die zwei Hauptparameter, die auch schon im einleitenden
+	Abschnitt angesprochen wurden. Die Federkonstante regelt, wie
+	">steif"< die Federn zwischen den Massepunkten sind, und die
+	Partikelmasse gibt das Gewicht eines solchen Punktes an.
+
+	Zur Erinnerung: Vertices eines Dreiecksmeshes werden zu Massepunkten
+	und die Edges dazwischen zu Federn.
+
+	Man erkennt schnell, dass auch die Federkonstante erhöht werden
+	muss, wenn die Masse erhöht wird. Das ist klar, denn die Federn
+	müssen dann mehr Gewicht tragen. Über die Masse lassen sich auch
+	Kollisionen steuern. Für eine Bowling-Szene muss der Kugel eine
+	entsprechend höhere Masse gegeben werden, denkbar wäre das folgende
+	Setup:
+
+	\itA
+		\item Die Kegel erhalten eine Masse von ">0.5"< mit der
+		Standard-Federkonstanten.
+
+		\item Die Bowlingkugel dagegen erhält die Masse ">10.0"< und
+		eine Federkonstante von ">10'000"<.
+	\itE
+
+	\item ">\textbf{Damping}"<: Fangen die Objekte an zu zittern, kann
+	die Dämpfung (der Federn) erhöht werden, um dem entgegenzuwirken.
+	Eigentlich ist der vorgegebene Wert ">0.5"< relativ niedrig und
+	häufig werden eher ">1"< oder ">2"< benötigt.
+
+	\item ">\textbf{Boundary Force}"<: Treffen zwei Soft Bodies
+	aufeinander, erfolgt die Kollisionserkennung nach dem Schema
+	">Punkte versus Flächen"<. Das heißt, für alle Punkte eines Soft
+	Bodies wird getestet, ob sie die Flächen eines anderen Soft Bodies
+	berühren. Wenn ja, dann liegt eine Kollision vor.
+
+	Dabei kann es passieren, dass sich Objekte durchdringen. Die
+	Boundary Force ist ein Versuch, diesem Effekt etwas
+	entgegenzuwirken.
+
+	\item ">\textbf{Internal Reps}"<: Die Zeitschritte der Simulation
+	von Soft Bodies wurden leicht von denen der restlichen Simulation
+	entkoppelt. Dieser Faktor regelt, wieviele zusätzliche Zeitpunkte
+	für diesen Körper betrachtet werden -- pro globalem Zeitschritt.
+	Steht zum Beispiel die globale Step Size auf ">0.01"< und die
+	Interal Reps auf ">5"<, läuft das auf eine effektive Step Size von
+	">0.002"< hinaus.
+
+	Man sollte diese Funktion aber nur behutsam anwenden. Insbesondere,
+	wenn man die Meldung bekommt, man möge für Soft Bodies doch bitte
+	die Zeitschritte verringern -- dann löst man das am besten über die
+	Internal Reps und lässt die globale Step Size unberührt.
+
+\itE
+
 %}}}
 
 %}}}
