@@ -757,7 +757,57 @@ Federn dieselbe Konstante und allen Massepunkten dieselbe Masse
 zugewiesen.
 %}}}
 
-TODO: Benutzung, Feder-Masse-System und so
+\subsection{Benutzung}
+%{{{
+Im Folgenden werden wir ein einfaches Szenario simulieren: Zwei leicht
+versetzt gegenüberliegende Würfel werden eine Rampe herunterrutschen und
+dann kollidieren.
+
+Erstellen wir zuerst die Rampe. Da diese später ein Boundary wird, ist
+hierfür ein \PolyMesh-Objekt perfekt geeignet. Wie genau man eine solche
+einfache Rampe erstellt, möchte ich hier nicht genauer beschreiben, da
+es dafür genügend andere Tutorials gibt.\footnote{Siehe zum Beispiel:
+\url{http://www.aoi-board.de/index.php?action=posts&fid=26&tid=16}} In
+einer gewissen Höhe darüber erstellen wir dann zwei einfache Würfel, die
+wir danach in \TriMesh'es konvertieren (befindet sich der Boden der
+Rampe in $Y$-Richtung bei $0$, dann setzen wir die Würfel etwa auf Höhe
+$8$). Damit die Körper auch schön ">soft"< aussehen, setzen wir ihre
+Smoothing Method auf ">Approximating"< -- und damit wir sie auch leicht
+auseinanderhalten können, bekommen sie zwei unterschiedliche Texturen.
+Zuguterletzt drehen wir die beiden noch ganz leicht, um eine gewisse
+Anfangsstörung in das System zu bringen (es ist meistens relativ
+langweilig, Objekte perfekt nach unten fallen zu lassen).
+Abbildung~\ref{fig:rampe1} zeigt ein solches Setup.
+
+\fpic{gfx/shots/Rampe1.png}{fig:rampe1}
+{Das fertige Setup mit Rampe und zwei geglätteten Würfeln.}
+
+Wichtig bei Texturen für Soft Bodies: Hier muss unter ">Texture
+Mapping"< in den normalen \aoi Optionen unbedingt der Haken ">Bind
+Texture Coordinates to Surface"< aktiviert werden, ansonsten verschiebt
+sich später die Textur.\footnote{Die Objekte werden durch die Simulation
+in ihrem lokalen Koordinatensystem verschoben.}
+
+Jetzt können wir ein Physik-Objekt in die Szene bringen, das all diese
+Objekte umfasst. Dort stellen wir wie gehabt die Rampe auf ">Boundary"<
+(um es etwas interessanter zu gestalten, kann hier direkt die Reibung
+zum Beispiel auf ">250"< gesetzt werden) und diesmal die beiden Würfel
+auf ">Soft"<. An deren Einstellungen ändern wir nur ">Internal Reps"<
+auf ">3"<, ansonsten bleibt alles bei den Standardeinstellungen. Jetzt
+kann auch schon gebacken werden -- dieser Vorgang sollte in wenigen
+Sekunden erledigt sein. Bewegt man hiernach den Zeitschieber, sollten
+die beiden Würfel herunterfallen und dann kollidieren -- wie in
+Abbildung~\ref{fig:rampe1-montage} zu sehen.
+
+\fpic{gfx/renders/Rampe1-montage.png}{fig:rampe1-montage}
+{Die aus Abbildung~\ref{fig:rampe1} entstandene Simulation der zwei
+fallenden Würfel.}
+%}}}
+
+\subsection{Erweiterte Optionen}
+%{{{
+%}}}
+
 %}}}
 
 
