@@ -302,7 +302,8 @@ Objektes als Grenzen, was einiges an Zwischenarbeit erforderte.} Das
 heißt für uns, dass wir ganz komfortabel ein \PolyMesh-Objekt in die
 Szene bringen und dieses unverändert nutzen können. Tun wir das also und
 erstellen uns ein sehr rudimentäres Becken. Um die Übersicht zu wahren,
-nennen wir es um in ">Becken"<.
+nennen wir es um in ">Becken"<. Es sollte ungefähr die Maße
+$6 \times 6 \times 2$ aufweisen.
 
 Eine kurze Randbemerkung: Primitive \aoi-Objekte, also Würfel, Kugeln
 oder Zylinder, können nicht als Hindernisse in der \fluidsim verwendet
@@ -607,9 +608,11 @@ erstellen.
 Der schnellste Weg, das zu tun, ist folgender:
 \itA
 	\item Wir klicken doppelt auf das \PolyMesh-Icon (sic!) und wählen
-	dort als Template ein ">Flat Mesh"< aus. Die Größe setzen wir zum
-	Beispiel auf 5x5. Die ">Smoothing Method"< in \emph{diesem} Dialog
-	muss noch auf ">None"< gesetzt werden.
+	dort als Template ein ">Flat Mesh"< aus. Die Größe setzen wir hier
+	zum Beispiel auf $5 \times 5$, das erstellte Objekt sollte dann etwa
+	die Ausdehnung $4 \times 4$ in AoI-Einheiten besitzen. Die
+	">Smoothing Method"< in \emph{diesem} Dialog muss noch auf ">None"<
+	gesetzt werden.
 
 	\item Nachdem wir ein solches Objekt erstellt haben, wandeln wir es
 	mit einem Rechtsklick in der Objektliste in ein \TriMesh um.
@@ -771,13 +774,14 @@ es dafür genügend andere Tutorials gibt.\footnote{Siehe zum Beispiel:
 einer gewissen Höhe darüber erstellen wir dann zwei einfache Würfel, die
 wir danach in \TriMesh'es konvertieren (befindet sich der Boden der
 Rampe in $Y$-Richtung bei $0$, dann setzen wir die Würfel etwa auf Höhe
-$8$). Damit die Körper auch schön ">soft"< aussehen, setzen wir ihre
-Smoothing Method auf ">Approximating"< -- und damit wir sie auch leicht
-auseinanderhalten können, bekommen sie zwei unterschiedliche Texturen.
-Zuguterletzt drehen wir die beiden noch ganz leicht, um eine gewisse
-Anfangsstörung in das System zu bringen (es ist meistens relativ
-langweilig, Objekte perfekt nach unten fallen zu lassen).
-Abbildung~\ref{fig:rampe1} zeigt ein solches Setup.
+$8$). Diese Würfel selbst sollten etwa die Ausdehnung $2 \times 2 \times
+2$ in AoI-Einheiten haben. Damit die Körper auch schön ">soft"<
+aussehen, setzen wir ihre Smoothing Method auf ">Approximating"< -- und
+damit wir sie auch leicht auseinanderhalten können, bekommen sie zwei
+unterschiedliche Texturen.  Zuguterletzt drehen wir die beiden noch ganz
+leicht, um eine gewisse Anfangsstörung in das System zu bringen (es ist
+meistens relativ langweilig, Objekte perfekt nach unten fallen zu
+lassen). Abbildung~\ref{fig:rampe1} zeigt ein solches Setup.
 
 \fpic{gfx/shots/Rampe1.png}{fig:rampe1}
 {Das fertige Setup mit Rampe und zwei geglätteten Würfeln.}
