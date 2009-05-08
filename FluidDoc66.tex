@@ -45,7 +45,7 @@
 %{{{
 \author{TroY}
 \title{\fluidsim 0.6.6 \\ mit Art of Illusion}
-\date{April 2009}
+\date{April/Mai 2009}
 \maketitle
 \thispagestyle{empty}
 
@@ -199,11 +199,6 @@ zu navigieren.
 {\aoi mit sichtbarer Zeitleiste. An der orange markierten Stelle muss
 gezogen werden, der grüne Schieber dient zum Setzen des Zeitpunktes.}
 
-Mit den weiteren Möglichkeiten zur Animation muss man sich vorerst nicht
-befassen. Wir werden allerdings später darauf zurückkommen, wenn wir das
-Rendern von Einzelbildern hinter uns haben und uns um echte Animationen
-kümmern.
-
 Da die Berechnungen, welche die \fluidsim anstellt, ziemlich aufwändig
 sind, können sie nicht in Echtzeit erfolgen. Die Simulation muss also
 vor dem eigentlichen Rendern vorberechnet werden. Dieser Vorgang wird
@@ -252,7 +247,7 @@ man die Partikelgröße, dann sollte man auch die Zeitschritte verringern.
 Eine feste Formel hierfür anzugeben, wäre aber nicht sonderlich
 praktikabel. Der Grund für diesen Zusammenhang ist, dass kleinere
 Partikel noch leichter Hindernisse überspringen oder gegenseitig
-ineinander eindringen können, als dass bei größeren Partikeln der Fall
+ineinander eindringen können, als das bei größeren Partikeln der Fall
 ist. Grob lässt sich sagen: Halbiert man die Particle Size, dann sollte
 man auch die Step Size halbieren.
 
@@ -462,9 +457,18 @@ definiert ist, bietet zusätzlich folgende Optionen:
 nach durch:
 
 \itA
-	\item ">\textbf{Is static}"<: Von dieser Eigenschaft werden wir
-	später im Animationskapitel noch Gebrauch machen. Sie bestimmt, ob
-	sich dieses Objekt bewegt oder nicht.
+	\item ">\textbf{Is static}"<: Diese Eigenschaft bestimmt, ob ein
+	Objekt ">bewegt wird"< oder nicht. Hiermit sind echte Animationen
+	gemeint, die man natürlich auch erstellen kann (statt nur
+	Einzelbildern). Sobald man manuell, also außerhalb der Simulation
+	mittels Keyframes oder prozeduralen Tracks, Objekte bewegt, muss
+	dieser Haken unbedingt gesetzt werden. Sonst bekommt die \fluidsim
+	davon nichts mit.
+
+	Für mehr Details zu Animationen generell sei noch einmal auf das
+	Handbuch verwiesen:
+
+	\url{http://www.uninformativ.de/tutorials/Vidiot/AoI_Manual_2_6_ger/animation_de.html}
 
 	\item ">\textbf{Is PolyBoundary}"<: Bestimmt, ob die Flächen des
 	Körpers als Grenzen angesehen werden sollen oder ob die alte
@@ -1098,17 +1102,6 @@ Abbildung~\ref{fig:selsets1}).
 \fpic{gfx/shots/SelectionSet1.png}{fig:selsets1}
 {Ein Selection Set in der Anwendung. Hier der Zustand, nachdem der Knopf
 ">Set To Selection"< betätigt wurde.}
-%}}}
-
-\subsection{Texturieren, Materialien und Rendern}
-%{{{
-TODO: Tex/Mat klar, Raster-Renderer empfehlen -- vielleicht nach Globale
-Optionen verschieben? So viel kommt hier nicht mehr zusammen
-%}}}
-
-\subsection{Animation}
-%{{{
-TODO: Kurzer Abriss, Parameter, Geschwindigkeiten nicht zu hoch, ...
 %}}}
 
 %}}}
