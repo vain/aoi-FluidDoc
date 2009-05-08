@@ -1063,7 +1063,24 @@ Aber der Reihe nach:
 
 \subsection{\fachb{Baking} fortsetzen}
 %{{{
-TODO: Wie das überhaupt geht, dabei Parameter ändern
+Es ist möglich, das Baking an einem beliebigen Punkt zu unterbrechen.
+Aber auch, wenn der Bake-Prozess sein reguläres Ende erreicht, kann man
+ihn später an dieser Stelle fortsetzen. Dazu öffnet man einfach die
+Einstellungen des Physik-Objektes, wechselt auf den ">Bake"<-Tab und
+stellt dort einen Zeitpunkt ein, der in der Zukunft liegt. Die
+Simulation setzt dann am aktuellen Zeitpunkt fort.
+
+Auf diesem Weg können auch die Parameter der Simulation ">im laufenden
+Betrieb"< geändert werden. Beispielsweise kann zwischendurch ein Emitter
+deaktiviert werden -- das ist auch so einfach, wie es klingt, er muss
+einfach in den Objektdefinitionen im Tab ">Object Management"< auf
+">None"< gesetzt werden.
+
+Zur Sicherheit sollte bei solchen Änderungen aber vor dem Fortsetzen des
+Bake-Prozesses der Knopf ">Clear Object Cache"< betätigt werden, damit
+auch alle Änderungen übernommen werden. \emph{Nicht} betätigen sollte
+man den Knopf ">Reset Simulation"< -- hiermit wird alles zurückgesetzt
+und bei Null begonnen.
 %}}}
 
 \subsection{\fachb{Selection Sets} zur Gruppierung}
